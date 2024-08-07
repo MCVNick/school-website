@@ -1,0 +1,86 @@
+$colors: (
+  stone: #545454,
+  slate: #212121,
+  charcoal: #0d0d0d,
+  frost: #d8d8d8,
+  snow: #f0f0f0,
+  darkSnow: #e4e4e4,
+  darkAqua: #06708e,
+  darkBlue: #63afc4,
+  lightBlue: #bddee5,
+  errorRed: #c22121,
+  errorLightRed: #cd4b4b,
+);
+
+$textSizes: (
+  xxxSmall: 16px,
+  xxSmall: 20px,
+  xSmall: 24px,
+  small: 28px,
+  medium: 32px,
+  mediumLarge: 48px,
+  large: 64px,
+  larger: 96px,
+  xLarge: 128px,
+  xxLarge: 192px,
+  xxxLarge: 256px,
+  huge: 512px,
+);
+
+$marPad: (
+  xxSmall: 4px,
+  xSmall: 8px,
+  small: 12px,
+  medium: 16px,
+  large: 20px,
+  xLarge: 24px,
+  xxLarge: 28px,
+  xxxLarge: 32px,
+);
+
+$breakpoints: (
+  phone: 1px,
+  tablet: 481px,
+  laptop: 769px,
+  desktop: 1025px,
+  largeDesktop: 1201px,
+);
+
+$zIndex: (
+  modal: 100,
+  dropdown: 10,
+  sticky: 1,
+  default: 0,
+  below: -1,
+  hide: -100,
+);
+
+$borderRadius: (
+  small: 5px,
+  medium: 10px,
+  large: 20px,
+  pill: 128px,
+  circle: 50%,
+);
+
+$boxShadow: (
+  small: 0 0 5px,
+  medium: 0 0 20px,
+  large: 0 0 30px,
+);
+
+$animations: (
+  slideIn: right 0.5s ease-in-out,
+);
+
+$fonts: (
+  comicNeue: "Comic Neue"
+);
+
+$fontWeights: (
+  light: 300,
+  regular: 400,
+  medium: 500,
+  bold: 700,
+  heavy: 900,
+);

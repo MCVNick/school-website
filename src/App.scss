@@ -1,0 +1,41 @@
+@import "vars";
+
+@media (min-width: 0) {
+  .App {
+    overflow: hidden;
+    background-color: map-get($colors, lightBlue);
+
+    > .not-supported {
+      display: initial;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-content: center;
+      justify-content: center;
+      align-items: center;
+      justify-items: center;
+    }
+
+    > .big-routes {
+      display: none;
+    }
+  }
+}
+
+@media (min-width: 300px) {
+  .App {
+    background-color: map-get($colors, darkBlue);
+    min-height: 100vh;
+    height: auto;
+
+    > .not-supported {
+      display: none;
+      height: 100%;
+    }
+
+    > .big-routes {
+      display: initial;
+    }
+  }
+}

@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Navbar from "./Comp/MajorNavbar/MajorNavbar";
 
-function App() {
+import "./reset.scss";
+import "./App.scss";
+
+const App = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <p className="not-supported">
+        This device is not supported. A screen width of at least 300 pixels is
+        required. If you somehow have a device that is this small, contact me
+        and I will attempt to make my site support the thing.
+      </p>
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route exact path="/" component={() => <div />} />
+          <Route exact path="/about" component={() => <div />} />
+          <Route exact path="/contact" component={() => <div />} />
+          <Route exact path="/resources" component={() => <div />} />
+        </Routes>
+      </Router>
     </div>
   );
-}
+};
 
 export default App;

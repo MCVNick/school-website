@@ -1,0 +1,237 @@
+@import "../../vars";
+
+.major-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: map-get($colors, darkAqua);
+  box-shadow: map-get($boxShadow, small) map-get($colors, darkAqua);
+
+  a, p {
+    text-decoration: none;
+    font-weight: map-get($fontWeights, bold);
+    color: map-get($colors, charcoal);
+
+    &:hover {
+      color: map-get($colors, slate);
+    }
+  }
+
+  > .brand {
+    > a, p {
+      color: map-get($colors, charcoal);
+
+      &:hover {
+        color: map-get($colors, slate);
+      }
+    }
+  }
+
+  > .menu-icon {
+    display: none;
+    display: flex;
+    background-color: transparent;
+  }
+
+  > .sidebar {
+    width: 0;
+    overflow: hidden;
+    transition: width 0.3s ease-in-out;
+    display: flex;
+    position: absolute;
+    right: 0;
+    top: calc((map-get($marPad, xSmall) * 2) + map-get($textSizes, medium));
+    z-index: map-get($zIndex, modal);
+    height: calc(
+      100vh - (map-get($marPad, xSmall) * 2) - map-get($textSizes, medium)
+    );
+
+    > .menu {
+      background-color: map-get($colors, lightBlue);
+      display: flex;
+      flex-direction: column;
+      gap: map-get($marPad, xSmall);
+      padding: map-get($marPad, xSmall);
+      transition: map-get($animations, slideIn);
+      width: 80%;
+      margin-left: 20%;
+      
+      li {
+        font-size: map-get($textSizes, medium);
+        cursor: pointer;
+  
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+  
+      &.small-screen {
+        display: none;
+      }
+    }
+  }
+
+  .search-container {
+    display: flex;
+    align-items: center;
+
+    input {
+      padding: 0.5rem;
+      border: none;
+      border-radius: 4px;
+      margin-right: 0.5rem;
+    }
+
+    button {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 4px;
+      background-color: #555;
+      color: #fff;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #777;
+      }
+    }
+  }
+
+  > .blur {
+    width: 0;
+    overflow: hidden;
+    transition: width 0.3s ease-in-out;
+    position: absolute;
+    height: calc(
+      100vh - (map-get($marPad, xSmall) * 2) - map-get($textSizes, medium)
+    );
+    top: calc((map-get($marPad, xSmall) * 2) + map-get($textSizes, medium));
+    left: 0;
+    z-index: map-get($zIndex, modal);
+    backdrop-filter: blur(4px);
+  }
+
+  > .show {
+    width: 100%;
+  }
+}
+
+@media (min-width: map-get($breakpoints, phone)) {
+  .major-navbar {
+    > .menu {
+      display: none;
+    }
+  }
+}
+
+@media (min-width: map-get($breakpoints, tablet)) {
+  .major-navbar {
+    > .menu {
+      display: flex;
+      flex-direction: row;
+    }
+
+    > .sidebar-toggle {
+      display: none;
+    }
+
+    > .sidebar {
+      display: none;
+    }
+
+    > .blur {
+      display: none;
+    }
+  }
+}
+
+@mixin responsive(
+  $minWidth: 0px,
+  $navPad: 0,
+  $linkFontSize: 0,
+  $linkFontWeight: 0,
+  $logoFontSize: 0,
+  $logoFontWeight: 0,
+  $menuLinkMargin: 0
+) {
+  @media (min-width: $minWidth) {
+    .major-navbar {
+      padding: $navPad;
+
+      a, p {
+        font-size: $linkFontSize;
+        font-weight: $linkFontWeight;
+      }
+
+      > .logo {
+        > a, p {
+          font-size: $logoFontSize;
+          font-weight: $logoFontWeight;
+        }
+      }
+
+      > .menu {
+        > a:not(:first-child), p:not(:first-child) {
+          margin-left: $menuLinkMargin;
+        }
+      }
+    }
+  }
+}
+
+@include responsive(
+  map-get($breakpoints, phone),
+  map-get($marPad, xSmall),
+  map-get($textSizes, xxSmall),
+  map-get($fontWeights, medium),
+  map-get($textSizes, medium),
+  map-get($fontWeights, heavy),
+  map-get($marPad, small)
+);
+@include responsive(
+  map-get($breakpoints, tablet),
+  map-get($marPad, small),
+  map-get($textSizes, small),
+  map-get($fontWeights, medium),
+  map-get($textSizes, medium),
+  map-get($fontWeights, heavy),
+  map-get($marPad, small)
+);
+@include responsive(
+  map-get($breakpoints, laptop),
+  map-get($marPad, xSmall),
+  map-get($textSizes, medium),
+  map-get($fontWeights, medium),
+  map-get($textSizes, large),
+  map-get($fontWeights, heavy),
+  map-get($marPad, small)
+);
+@include responsive(
+  map-get($breakpoints, desktop),
+  map-get($marPad, small),
+  map-get($textSizes, medium),
+  map-get($fontWeights, medium),
+  map-get($textSizes, large),
+  map-get($fontWeights, heavy),
+  map-get($marPad, medium)
+);
+@include responsive(
+  map-get($breakpoints, largeDesktop),
+  map-get($marPad, medium),
+  map-get($textSizes, medium),
+  map-get($fontWeights, medium),
+  map-get($textSizes, large),
+  map-get($fontWeights, heavy),
+  map-get($marPad, medium)
+);
+
+@media (max-height: 500px) {
+  @include responsive(
+    map-get($breakpoints, phone),
+    map-get($marPad, xSmall),
+    map-get($textSizes, xxSmall),
+    map-get($fontWeights, medium),
+    map-get($textSizes, medium),
+    map-get($fontWeights, heavy),
+    map-get($marPad, small)
+  );
+}
