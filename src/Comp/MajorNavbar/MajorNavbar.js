@@ -96,10 +96,7 @@ const MajorNavbar = () => {
       )}
       {isSmallScreen && <div className={`blur ${showSidebar ? "show" : ""}`} />}
       {isSmallScreen && (
-        <div
-          onClick={toggleSidebar}
-          className={`sidebar ${showSidebar ? "show" : ""}`}
-        >
+        <div className={`sidebar ${showSidebar ? "show" : ""}`}>
           <FontAwesomeIcon
             icon={faTimes}
             className="close-icon"

@@ -108,6 +108,7 @@
           margin-bottom: map-get($marPad, small);
           border: 1px solid map-get($colors, frost);
           border-radius: 4px;
+          width: 100%;
         }
         button {
           padding: map-get($marPad, xSmall) map-get($marPad, small);
@@ -178,6 +179,9 @@
 
 @media (min-width: map-get($breakpoints, phone)) {
   .major-navbar {
+    .brand h1 {
+      font-size: map-get($textSizes, normal);
+    }
     .menu {
       display: none;
     }
@@ -194,6 +198,10 @@
   .major-navbar {
     .menu {
       display: flex;
+      li {
+        font-size: map-get($textSizes, small);
+        margin: 0 map-get($marPad, xxSmall);
+      }
     }
     .search-container {
       display: none;
@@ -209,6 +217,9 @@
 
 @media (min-width: map-get($breakpoints, laptop)) {
   .major-navbar {
+    .brand h1 {
+      font-size: map-get($textSizes, large);
+    }
     .menu {
       display: flex;
     }
