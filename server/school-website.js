@@ -1,6 +1,6 @@
 const express = require("express");
 const { json } = require("express");
-const { ApolloServer } = require("apollo-server-express");
+// const { ApolloServer } = require("apollo-server-express");
 const expressStaticGzip = require("express-static-gzip");
 const { SitemapStream, streamToPromise } = require("sitemap");
 const { createGzip } = require("zlib");
@@ -46,7 +46,7 @@ app.get("/sitemap.xml", function (req, res) {
 
   try {
     const smStream = new SitemapStream({
-      hostname: "https://earlyreader.ai/",
+      hostname: "https://nicholasmcqueen.com/",
     });
     const pipeline = smStream.pipe(createGzip());
 
@@ -67,12 +67,12 @@ app.get("/sitemap.xml", function (req, res) {
   }
 });
 
-// Start the server
-const schema = require("./graphql/schema.js");
-const server = new ApolloServer({ schema });
+// // Start the server
+// const schema = require("./graphql/schema.js");
+// const server = new ApolloServer({ schema });
 async function startServer() {
-  await server.start();
-  server.applyMiddleware({ app, path: "/graphql", gui: false});
+  // await server.start();
+  // server.applyMiddleware({ app, path: "/graphql", gui: false});
 
   app.listen(
     SERVER_PORT,
