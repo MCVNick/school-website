@@ -1,72 +1,30 @@
-@import "../../vars";
+@import './../../vars';
 
 .major-navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: map-get($colors, darkAqua);
-  box-shadow: map-get($boxShadow, small) map-get($colors, darkAqua);
+  padding: map-get($marPad, normal);
+  background-color: map-get($colors, primary);
+  color: map-get($colors, snow);
 
-  a, p {
-    text-decoration: none;
+  .brand {
+    font-size: map-get($textSizes, large);
     font-weight: map-get($fontWeights, bold);
-    color: map-get($colors, charcoal);
-
-    &:hover {
-      color: map-get($colors, slate);
+    h1 {
+      color: map-get($colors, snow);
+      text-decoration: none;
     }
   }
 
-  > .brand {
-    > a, p {
-      color: map-get($colors, charcoal);
-
+  .menu {
+    display: flex;
+    list-style: none;
+    li {
+      margin: 0 map-get($marPad, small);
+      cursor: pointer;
       &:hover {
-        color: map-get($colors, slate);
-      }
-    }
-  }
-
-  > .menu-icon {
-    display: none;
-    display: flex;
-    background-color: transparent;
-  }
-
-  > .sidebar {
-    width: 0;
-    overflow: hidden;
-    transition: width 0.3s ease-in-out;
-    display: flex;
-    position: absolute;
-    right: 0;
-    top: calc((map-get($marPad, xSmall) * 2) + map-get($textSizes, medium));
-    z-index: map-get($zIndex, modal);
-    height: calc(
-      100vh - (map-get($marPad, xSmall) * 2) - map-get($textSizes, medium)
-    );
-
-    > .menu {
-      background-color: map-get($colors, lightBlue);
-      display: flex;
-      flex-direction: column;
-      gap: map-get($marPad, xSmall);
-      padding: map-get($marPad, xSmall);
-      transition: map-get($animations, slideIn);
-      width: 80%;
-      margin-left: 20%;
-      
-      li {
-        font-size: map-get($textSizes, medium);
-        cursor: pointer;
-  
-        &:hover {
-          text-decoration: underline;
-        }
-      }
-  
-      &.small-screen {
-        display: none;
+        text-decoration: underline;
       }
     }
   }
@@ -74,164 +32,81 @@
   .search-container {
     display: flex;
     align-items: center;
-
     input {
-      padding: 0.5rem;
-      border: none;
+      padding: map-get($marPad, xSmall);
+      margin-right: map-get($marPad, small);
+      border: 1px solid map-get($colors, frost);
       border-radius: 4px;
-      margin-right: 0.5rem;
     }
-
     button {
-      padding: 0.5rem 1rem;
+      padding: map-get($marPad, xSmall) map-get($marPad, small);
+      background-color: map-get($colors, secondary);
       border: none;
       border-radius: 4px;
-      background-color: #555;
-      color: #fff;
       cursor: pointer;
-
       &:hover {
-        background-color: #777;
+        background-color: darken(map-get($colors, secondary), 10%);
       }
     }
   }
 
-  > .blur {
-    width: 0;
-    overflow: hidden;
-    transition: width 0.3s ease-in-out;
-    position: absolute;
-    height: calc(
-      100vh - (map-get($marPad, xSmall) * 2) - map-get($textSizes, medium)
-    );
-    top: calc((map-get($marPad, xSmall) * 2) + map-get($textSizes, medium));
+  .menu-icon {
+    display: none;
+    font-size: map-get($textSizes, large);
+    cursor: pointer;
+  }
+
+  .blur {
+    display: none;
+    position: fixed;
+    top: 0;
     left: 0;
-    z-index: map-get($zIndex, modal);
-    backdrop-filter: blur(4px);
-  }
-
-  > .show {
     width: 100%;
-  }
-}
-
-@media (min-width: map-get($breakpoints, phone)) {
-  .major-navbar {
-    > .menu {
-      display: none;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: map-get($zIndex, modal);
+    &.show {
+      display: block;
     }
   }
-}
 
-@media (min-width: map-get($breakpoints, tablet)) {
-  .major-navbar {
-    > .menu {
-      display: flex;
-      flex-direction: row;
-    }
-
-    > .sidebar-toggle {
-      display: none;
-    }
-
-    > .sidebar {
-      display: none;
-    }
-
-    > .blur {
-      display: none;
-    }
-  }
-}
-
-@mixin responsive(
-  $minWidth: 0px,
-  $navPad: 0,
-  $linkFontSize: 0,
-  $linkFontWeight: 0,
-  $logoFontSize: 0,
-  $logoFontWeight: 0,
-  $menuLinkMargin: 0
-) {
-  @media (min-width: $minWidth) {
-    .major-navbar {
-      padding: $navPad;
-
-      a, p {
-        font-size: $linkFontSize;
-        font-weight: $linkFontWeight;
-      }
-
-      > .logo {
-        > a, p {
-          font-size: $logoFontSize;
-          font-weight: $logoFontWeight;
-        }
-      }
-
-      > .menu {
-        > a:not(:first-child), p:not(:first-child) {
-          margin-left: $menuLinkMargin;
+  .sidebar {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 250px;
+    height: 100%;
+    background-color: map-get($colors, primary);
+    z-index: map-get($zIndex, modal);
+    padding: map-get($marPad, normal);
+    ul {
+      list-style: none;
+      li {
+        margin: map-get($marPad, small) 0;
+        cursor: pointer;
+        &:hover {
+          text-decoration: underline;
         }
       }
     }
+    &.show {
+      display: block;
+      animation: map-get($animations, slideIn);
+    }
   }
 }
 
-@include responsive(
-  map-get($breakpoints, phone),
-  map-get($marPad, xSmall),
-  map-get($textSizes, xxSmall),
-  map-get($fontWeights, medium),
-  map-get($textSizes, medium),
-  map-get($fontWeights, heavy),
-  map-get($marPad, small)
-);
-@include responsive(
-  map-get($breakpoints, tablet),
-  map-get($marPad, small),
-  map-get($textSizes, small),
-  map-get($fontWeights, medium),
-  map-get($textSizes, medium),
-  map-get($fontWeights, heavy),
-  map-get($marPad, small)
-);
-@include responsive(
-  map-get($breakpoints, laptop),
-  map-get($marPad, xSmall),
-  map-get($textSizes, medium),
-  map-get($fontWeights, medium),
-  map-get($textSizes, large),
-  map-get($fontWeights, heavy),
-  map-get($marPad, small)
-);
-@include responsive(
-  map-get($breakpoints, desktop),
-  map-get($marPad, small),
-  map-get($textSizes, medium),
-  map-get($fontWeights, medium),
-  map-get($textSizes, large),
-  map-get($fontWeights, heavy),
-  map-get($marPad, medium)
-);
-@include responsive(
-  map-get($breakpoints, largeDesktop),
-  map-get($marPad, medium),
-  map-get($textSizes, medium),
-  map-get($fontWeights, medium),
-  map-get($textSizes, large),
-  map-get($fontWeights, heavy),
-  map-get($marPad, medium)
-);
-
-@media (max-height: 500px) {
-  @include responsive(
-    map-get($breakpoints, phone),
-    map-get($marPad, xSmall),
-    map-get($textSizes, xxSmall),
-    map-get($fontWeights, medium),
-    map-get($textSizes, medium),
-    map-get($fontWeights, heavy),
-    map-get($marPad, small)
-  );
+@media (max-width: map-get($breakpoints, tablet)) {
+  .major-navbar {
+    .menu {
+      display: none;
+    }
+    .search-container {
+      display: none;
+    }
+    .menu-icon {
+      display: block;
+    }
+  }
 }

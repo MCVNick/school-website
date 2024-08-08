@@ -12,7 +12,7 @@ const MajorNavbar = () => {
   const navigate = useNavigate();
 
   const handleResize = () => {
-    setIsSmallScreen(window.innerWidth <= 768);
+    setIsSmallScreen(window.innerWidth <= 1024);
   };
 
   useEffect(() => {
@@ -44,14 +44,15 @@ const MajorNavbar = () => {
   return (
     <nav className="major-navbar">
       <div className="brand">
-        <a href="/">Mr. McQueen's Class</a>
+        <h1 onClick={() => handleNavigation("/")}>Mr. McQueen's Class</h1>
       </div>
-      <ul className={`menu ${isSmallScreen ? "small-screen" : ""}`}>
+      <ul className={"menu"}>
+        <li onClick={() => handleNavigation("/")}>Home</li>
         <li onClick={() => handleNavigation("/about")}>About</li>
         <li onClick={() => handleNavigation("/contact")}>Contact</li>
         <li onClick={() => handleNavigation("/resources")}>Resources</li>
       </ul>
-      <div className="search-container">
+      {!isSmallScreen && <div className="search-container">
         <input
           type="text"
           placeholder="Search"
@@ -59,7 +60,7 @@ const MajorNavbar = () => {
           onChange={(e) => setSearchQuery(e.target.value)}
         />
         <button onClick={handleSearch}>Search</button>
-      </div>
+      </div>}
       {isSmallScreen && (
         <FontAwesomeIcon
           icon={faBars}

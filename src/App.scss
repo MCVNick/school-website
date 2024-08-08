@@ -3,7 +3,7 @@
 @media (min-width: 0) {
   .App {
     overflow: hidden;
-    background-color: map-get($colors, lightBlue);
+    background-color: map-get($colors, mainBackground);
 
     > .not-supported {
       display: initial;

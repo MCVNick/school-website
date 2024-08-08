@@ -5,33 +5,29 @@ $colors: (
   frost: #d8d8d8,
   snow: #f0f0f0,
   darkSnow: #e4e4e4,
-  darkAqua: #06708e,
-  darkBlue: #63afc4,
-  lightBlue: #bddee5,
+  primary: #06708e,
+  secondary: #95d3e1,
+  mainBackground: #63afc4,
   errorRed: #c22121,
   errorLightRed: #cd4b4b,
 );
 
 $textSizes: (
-  xxxSmall: 16px,
-  xxSmall: 20px,
+  xxSmall: 16px,
   xSmall: 24px,
-  small: 28px,
-  medium: 32px,
-  mediumLarge: 48px,
-  large: 64px,
-  larger: 96px,
-  xLarge: 128px,
-  xxLarge: 192px,
-  xxxLarge: 256px,
-  huge: 512px,
+  small: 32px,
+  normal: 40px,
+  large: 48px,
+  xLarge: 56px,
+  xxLarge: 64px,
+  xxxLarge: 72px,
 );
 
 $marPad: (
   xxSmall: 4px,
   xSmall: 8px,
   small: 12px,
-  medium: 16px,
+  normal: 16px,
   large: 20px,
   xLarge: 24px,
   xxLarge: 28px,
@@ -39,11 +35,10 @@ $marPad: (
 );
 
 $breakpoints: (
-  phone: 1px,
-  tablet: 481px,
-  laptop: 769px,
-  desktop: 1025px,
-  largeDesktop: 1201px,
+  phone: 0px,
+  tablet: 600px,
+  laptop: 1024px,
+  desktop: 1440px,
 );
 
 $zIndex: (
@@ -55,18 +50,10 @@ $zIndex: (
   hide: -100,
 );
 
-$borderRadius: (
-  small: 5px,
-  medium: 10px,
-  large: 20px,
-  pill: 128px,
-  circle: 50%,
-);
-
 $boxShadow: (
-  small: 0 0 5px,
-  medium: 0 0 20px,
-  large: 0 0 30px,
+  small: 0 0 4px,
+  medium: 0 0 8px,
+  large: 0 0 16px,
 );
 
 $animations: (

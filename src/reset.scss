@@ -92,7 +92,7 @@ input {
   color: map-get($colors, charcoal);
   font-family: map-get($fonts, comicNeue), sans-serif;
   font-weight: map-get($fontWeights, regular);
-  font-size: map-get($textSizes, medium);
+  font-size: map-get($textSizes, normal);
 }
 html,
 body {
