@@ -50,6 +50,12 @@
     }
   }
 
+  .search-icon {
+    display: none;
+    font-size: map-get($textSizes, large);
+    cursor: pointer;
+  }
+
   .menu-icon {
     display: none;
     font-size: map-get($textSizes, large);
@@ -67,6 +73,7 @@
     z-index: map-get($zIndex, modal);
     &.show {
       display: block;
+      animation: blurIn 0.5s ease-in-out;
     }
   }
 
@@ -92,12 +99,60 @@
     }
     &.show {
       display: block;
-      animation: map-get($animations, slideIn);
+      animation: slideIn 0.5s ease-in-out;
+    }
+  }
+
+  .search-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: map-get($colors, primary);
+    padding: map-get($marPad, normal);
+    border-radius: 4px;
+    z-index: map-get($zIndex, modal);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    input {
+      padding: map-get($marPad, xSmall);
+      margin-bottom: map-get($marPad, small);
+      border: 1px solid map-get($colors, frost);
+      border-radius: 4px;
+    }
+    button {
+      padding: map-get($marPad, xSmall) map-get($marPad, small);
+      background-color: map-get($colors, secondary);
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      &:hover {
+        background-color: darken(map-get($colors, secondary), 10%);
+      }
     }
   }
 }
 
-@media (max-width: map-get($breakpoints, tablet)) {
+@keyframes slideIn {
+  from {
+    right: -250px;
+  }
+  to {
+    right: 0;
+  }
+}
+
+@keyframes blurIn {
+  from {
+    left: -100%;
+  }
+  to {
+    left: 0;
+  }
+}
+
+@media (min-width: map-get($breakpoints, phone)) {
   .major-navbar {
     .menu {
       display: none;
@@ -107,6 +162,57 @@
     }
     .menu-icon {
       display: block;
+    }
+  }
+}
+
+@media (min-width: map-get($breakpoints, tablet)) {
+  .major-navbar {
+    .menu {
+      display: flex;
+    }
+    .search-container {
+      display: none;
+    }
+    .search-icon {
+      display: block;
+    }
+    .menu-icon {
+      display: none;
+    }
+  }
+}
+
+@media (min-width: map-get($breakpoints, laptop)) {
+  .major-navbar {
+    .menu {
+      display: flex;
+    }
+    .search-container {
+      display: none;
+    }
+    .search-icon {
+      display: block;
+    }
+    .menu-icon {
+      display: none;
+    }
+  }
+}
+
+@media (min-width: map-get($breakpoints, desktop)) {
+  .major-navbar {
+    .menu {
+      display: flex;
+    }
+    .search-container {
+      display: flex;
+    }
+    .search-icon {
+      display: none;
+    }
+    .menu-icon {
+      display: none;
     }
   }
 }

@@ -1,18 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faSearch } from "@fortawesome/free-solid-svg-icons";
 
 import "./MajorNavbar.scss";
 
 const MajorNavbar = () => {
   const [showSidebar, setShowSidebar] = useState(false);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [isTabletScreen, setIsTabletScreen] = useState(false);
+  const [isLaptopScreen, setIsLaptopScreen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [showSearchPopup, setShowSearchPopup] = useState(false);
   const navigate = useNavigate();
 
   const handleResize = () => {
-    setIsSmallScreen(window.innerWidth <= 1024);
+    const width = window.innerWidth;
+    setIsSmallScreen(width <= 600);
+    setIsTabletScreen(width > 600 && width <= 1024);
+    setIsLaptopScreen(width > 1024 && width <= 1440);
   };
 
   useEffect(() => {
@@ -41,6 +47,10 @@ const MajorNavbar = () => {
     console.log("Search query:", searchQuery);
   };
 
+  const toggleSearchPopup = () => {
+    setShowSearchPopup(!showSearchPopup);
+  };
+
   return (
     <nav className="major-navbar">
       <div className="brand">
@@ -52,15 +62,24 @@ const MajorNavbar = () => {
         <li onClick={() => handleNavigation("/contact")}>Contact</li>
         <li onClick={() => handleNavigation("/resources")}>Resources</li>
       </ul>
-      {!isSmallScreen && <div className="search-container">
-        <input
-          type="text"
-          placeholder="Search"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
+      {isLaptopScreen && (
+        <FontAwesomeIcon
+          icon={faSearch}
+          className="search-icon"
+          onClick={toggleSearchPopup}
         />
-        <button onClick={handleSearch}>Search</button>
-      </div>}
+      )}
+      {!isSmallScreen && !isTabletScreen && !isLaptopScreen && (
+        <div className="search-container">
+          <input
+            type="text"
+            placeholder="Search"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          <button onClick={handleSearch}>Search</button>
+        </div>
+      )}
       {isSmallScreen && (
         <FontAwesomeIcon
           icon={faBars}
@@ -77,7 +96,27 @@ const MajorNavbar = () => {
           <ul>
             <li onClick={() => handleNavigation("/login")}>Log In</li>
             <li onClick={() => handleNavigation("/signup")}>Sign Up</li>
+            <li>
+              <input
+                type="text"
+                placeholder="Search"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+              <button onClick={handleSearch}>Search</button>
+            </li>
           </ul>
+        </div>
+      )}
+      {showSearchPopup && (
+        <div className="search-popup">
+          <input
+            type="text"
+            placeholder="Search"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          <button onClick={handleSearch}>Search</button>
         </div>
       )}
     </nav>
