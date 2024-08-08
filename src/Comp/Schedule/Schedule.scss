@@ -1,0 +1,65 @@
+.schedule-container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.schedule-table {
+  width: 100%;
+  border-collapse: collapse;
+  
+  tr {
+    background-color: #ffffff;
+
+    th {
+      background-color: #ffffff;
+    }
+  }
+}
+
+.schedule-table th,
+.schedule-table td {
+  border: 1px solid #000;
+  text-align: center;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.schedule-table th {
+  background-color: #f2f2f2;
+}
+
+.blue {
+  background-color: #70a7ff;
+}
+
+.orange {
+  background-color: #ffac11;
+}
+
+.green {
+  background-color: #8dff77;
+}
+
+.purple {
+  background-color: #b86dff;
+}
+
+.red {
+  background-color: #ff3838;
+}
+
+.pink {
+  background-color: #ffc072;
+}
+
+.white {
+  background-color: #ffffff;
+}
+
+.black {
+  background-color: #000000;
+}

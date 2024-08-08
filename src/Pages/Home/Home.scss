@@ -1,0 +1,105 @@
+@import "./../../vars";
+
+.home {
+  padding: map-get($marPad, normal);
+
+  .home-header {
+    background-color: map-get($colors, secondary);
+    padding: map-get($marPad, xxxLarge);
+    text-align: center;
+    margin-bottom: map-get($marPad, large);
+
+    h1 {
+      font-size: map-get($textSizes, xxLarge);
+    }
+
+    p {
+      font-size: map-get($textSizes, large);
+      color: map-get($colors, stone);
+    }
+  }
+
+  .home-main {
+    .home-cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: map-get($marPad, normal);
+
+      .card {
+        background-color: map-get($colors, snow);
+        padding: map-get($marPad, normal);
+        box-shadow: map-get($boxShadow, small);
+        border-radius: 8px;
+        flex: 1 1 calc(33.333% - map-get($marPad, normal));
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        height: 600px; /* Set a fixed height for the cards */
+
+        &.large {
+          flex: 2 1 calc(66.666% - map-get($marPad, normal));
+        }
+
+        &.medium {
+          flex: 1 1 calc(50% - map-get($marPad, normal));
+        }
+
+        &.small {
+          flex: 1 1 calc(25% - map-get($marPad, normal));
+        }
+
+        h2 {
+          font-size: map-get($textSizes, large);
+          margin-bottom: map-get($marPad, small);
+        }
+
+        .scrollable-content {
+          flex-grow: 1;
+          overflow-y: auto;
+        }
+
+        iframe {
+          width: 100%;
+          height: 100%;
+          flex-grow: 1; /* Ensure the iframe takes up the remaining space */
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: map-get($breakpoints, laptop)) {
+  .home {
+    .home-main {
+      .home-cards {
+        .card {
+          flex: 1 1 calc(50% - map-get($marPad, normal));
+
+          &.large {
+            flex: 1 1 100%;
+          }
+
+          &.medium {
+            flex: 1 1 calc(50% - map-get($marPad, normal));
+          }
+
+          &.small {
+            flex: 1 1 calc(50% - map-get($marPad, normal));
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: map-get($breakpoints, tablet)) {
+  .home {
+    .home-main {
+      .home-cards {
+        .card {
+          flex: 1 1 100%;
+        }
+      }
+    }
+  }
+}

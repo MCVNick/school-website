@@ -1,10 +1,13 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+
 import Navbar from "./Comp/MajorNavbar/MajorNavbar";
+import Footer from "./Comp/Footer/Footer";
+
+import Home from "./Pages/Home/Home";
 
 import "./reset.scss";
 import "./App.scss";
-import Footer from "./Comp/Footer/Footer";
 
 const App = () => {
   return (
@@ -17,10 +20,10 @@ const App = () => {
       <Router>
         <Navbar />
         <Routes>
-          <Route exact path="/" component={() => <div />} />
-          <Route exact path="/about" component={() => <div />} />
-          <Route exact path="/contact" component={() => <div />} />
-          <Route exact path="/resources" component={() => <div />} />
+          <Route exact path="/" element={<Home />} />
+          <Route exact path="/about" element={<div />} />
+          <Route exact path="/contact" element={<div />} />
+          <Route exact path="/resources" element={<div />} />
         </Routes>
         <Footer />
       </Router>
