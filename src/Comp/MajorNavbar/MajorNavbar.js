@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faSearch, faTimes } from "@fortawesome/free-solid-svg-icons";
 
 import "./MajorNavbar.scss";
 
@@ -80,6 +80,13 @@ const MajorNavbar = () => {
           <button onClick={handleSearch}>Search</button>
         </div>
       )}
+      {isTabletScreen && (
+        <FontAwesomeIcon
+          icon={faSearch}
+          className="search-icon"
+          onClick={toggleSearchPopup}
+        />
+      )}
       {isSmallScreen && (
         <FontAwesomeIcon
           icon={faBars}
@@ -93,9 +100,16 @@ const MajorNavbar = () => {
           onClick={toggleSidebar}
           className={`sidebar ${showSidebar ? "show" : ""}`}
         >
+          <FontAwesomeIcon
+            icon={faTimes}
+            className="close-icon"
+            onClick={toggleSidebar}
+          />
           <ul>
-            <li onClick={() => handleNavigation("/login")}>Log In</li>
-            <li onClick={() => handleNavigation("/signup")}>Sign Up</li>
+            <li onClick={() => handleNavigation("/")}>Home</li>
+            <li onClick={() => handleNavigation("/about")}>About</li>
+            <li onClick={() => handleNavigation("/contact")}>Contact</li>
+            <li onClick={() => handleNavigation("/resources")}>Resources</li>
             <li>
               <input
                 type="text"
