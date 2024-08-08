@@ -1,0 +1,147 @@
+@import "./../../vars";
+
+.footer {
+  background-color: map-get($colors, primary);
+  color: map-get($colors, snow);
+  padding: map-get($marPad, normal) map-get($marPad, large);
+
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    .footer-section {
+      flex: 1;
+      margin: map-get($marPad, small);
+
+      h2 {
+        font-size: map-get($textSizes, normal);
+        margin-bottom: map-get($marPad, small);
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+
+        li {
+          margin-bottom: map-get($marPad, xSmall);
+
+          span {
+            color: map-get($colors, snow);
+            text-decoration: none;
+
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+
+      p {
+        margin: 0;
+      }
+
+      .social-icons {
+        display: flex;
+
+        a {
+          color: map-get($colors, snow);
+          font-size: map-get($textSizes, large);
+          margin-right: map-get($marPad, small);
+
+          &:hover {
+            color: map-get($colors, secondary);
+          }
+        }
+      }
+    }
+
+    .contact {
+      > span {
+        display: flex;
+        margin-bottom: map-get($marPad, xSmall);
+        > svg {
+          margin-right: map-get($marPad, xSmall);
+        }
+      }
+    }
+  }
+
+  .footer-bottom {
+    text-align: center;
+    margin-top: map-get($marPad, normal);
+    font-size: map-get($textSizes, small);
+  }
+}
+
+@media (min-width: map-get($breakpoints, phone)) {
+  .footer {
+    .footer-content {
+      flex-direction: column;
+      align-items: center;
+
+      .footer-section {
+        text-align: center;
+      }
+
+      .contact {
+        span {
+          flex-direction: column;
+          p {
+            font-size: map-get($textSizes, xSmall);
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: map-get($breakpoints, tablet)) {
+  .footer {
+    .footer-content {
+      flex-direction: row;
+      align-items: flex-start;
+
+      .footer-section {
+        text-align: left;
+      }
+
+      .contact {
+        span {
+          flex-direction: row;
+          p {
+            font-size: map-get($textSizes, small);
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: map-get($breakpoints, laptop)) {
+  .footer {
+    .footer-content {
+      .footer-section {
+        h2 {
+          font-size: map-get($textSizes, large);
+        }
+      }
+
+      .contact p {
+        font-size: map-get($textSizes, normal);
+      }
+    }
+  }
+}
+
+@media (min-width: map-get($breakpoints, desktop)) {
+  .footer {
+    .footer-content {
+      .footer-section {
+        h2 {
+          font-size: map-get($textSizes, xLarge);
+        }
+      }
+    }
+  }
+}

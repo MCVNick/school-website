@@ -4,6 +4,7 @@ import Navbar from "./Comp/MajorNavbar/MajorNavbar";
 
 import "./reset.scss";
 import "./App.scss";
+import Footer from "./Comp/Footer/Footer";
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
           <Route exact path="/contact" component={() => <div />} />
           <Route exact path="/resources" component={() => <div />} />
         </Routes>
+        <Footer />
       </Router>
     </div>
   );
