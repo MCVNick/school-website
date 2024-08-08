@@ -11,6 +11,7 @@
   .brand {
     font-size: map-get($textSizes, large);
     font-weight: map-get($fontWeights, bold);
+    cursor: pointer;
     h1 {
       color: map-get($colors, snow);
       text-decoration: none;
@@ -156,6 +157,14 @@
         background-color: darken(map-get($colors, secondary), 10%);
       }
     }
+    .close-icon-container {
+      display: flex;
+      justify-content: flex-end;
+      width: 100%;
+    }
+    .close-icon {
+      cursor: pointer;
+    }
   }
 }
 
@@ -180,7 +189,7 @@
 @media (min-width: map-get($breakpoints, phone)) {
   .major-navbar {
     .brand h1 {
-      font-size: map-get($textSizes, normal);
+      font-size: map-get($textSizes, small);
     }
     .menu {
       display: none;
@@ -194,8 +203,13 @@
   }
 }
 
-@media (min-width: map-get($breakpoints, tablet)) {
+// @media (min-width: map-get($breakpoints, tablet)) {
+// ^This is to break the navbar up better for smaller screens
+  @media (min-width: 870px) {
   .major-navbar {
+    .brand h1 {
+      font-size: map-get($textSizes, normal);
+    }
     .menu {
       display: flex;
       li {

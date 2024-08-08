@@ -16,7 +16,7 @@ const MajorNavbar = () => {
 
   const handleResize = () => {
     const width = window.innerWidth;
-    setIsSmallScreen(width <= 600);
+    setIsSmallScreen(width <= 870);
     setIsTabletScreen(width > 600 && width <= 1024);
     setIsLaptopScreen(width > 1024 && width <= 1440);
   };
@@ -121,6 +121,13 @@ const MajorNavbar = () => {
       )}
       {showSearchPopup && (
         <div className="search-popup">
+          <div className="close-icon-container">
+            <FontAwesomeIcon
+              icon={faTimes}
+              className="close-icon"
+              onClick={toggleSearchPopup}
+            />
+          </div>
           <input
             type="text"
             placeholder="Search"
