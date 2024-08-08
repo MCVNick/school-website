@@ -51,10 +51,10 @@ const Footer = () => {
         <div className="footer-section social">
           <h2>Follow Us</h2>
           <div className="social-icons">
-            <a href="https://github.com/MCVNick">
+            <a href="https://github.com/MCVNick" aria-label="Github">
               <FontAwesomeIcon icon={faGithub} />
             </a>
-            <a href="https://www.linkedin.com/in/n-mcqueen/">
+            <a href="https://www.linkedin.com/in/n-mcqueen/" aria-label="LinkedIn">
               <FontAwesomeIcon icon={faLinkedin} />
             </a>
             {/* list more as an a tag */}

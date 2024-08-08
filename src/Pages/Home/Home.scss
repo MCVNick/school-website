@@ -15,14 +15,14 @@
 
     p {
       font-size: map-get($textSizes, large);
-      color: map-get($colors, stone);
+      color: map-get($colors, slate);
     }
   }
 
   .home-main {
     .home-cards {
-      display: flex;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       gap: map-get($marPad, normal);
 
       .card {
@@ -30,22 +30,24 @@
         padding: map-get($marPad, normal);
         box-shadow: map-get($boxShadow, small);
         border-radius: 8px;
-        flex: 1 1 calc(33.333% - map-get($marPad, normal));
         box-sizing: border-box;
         display: flex;
         flex-direction: column;
-        height: 600px; /* Set a fixed height for the cards */
 
-        &.large {
-          flex: 2 1 calc(66.666% - map-get($marPad, normal));
+        &.calendar {
+          grid-column: span 1;
+          grid-row: span 2;
+          min-height: 600px;
         }
 
-        &.medium {
-          flex: 1 1 calc(50% - map-get($marPad, normal));
+        &.announcements,
+        &.assignments {
+          grid-column: span 1;
         }
 
-        &.small {
-          flex: 1 1 calc(25% - map-get($marPad, normal));
+        &.class-schedule {
+          grid-column: span 1;
+          grid-row: span 2;
         }
 
         h2 {
@@ -72,32 +74,11 @@
   .home {
     .home-main {
       .home-cards {
+        grid-template-columns: 1fr;
+
         .card {
-          flex: 1 1 calc(50% - map-get($marPad, normal));
-
-          &.large {
-            flex: 1 1 100%;
-          }
-
-          &.medium {
-            flex: 1 1 calc(50% - map-get($marPad, normal));
-          }
-
-          &.small {
-            flex: 1 1 calc(50% - map-get($marPad, normal));
-          }
-        }
-      }
-    }
-  }
-}
-
-@media (max-width: map-get($breakpoints, tablet)) {
-  .home {
-    .home-main {
-      .home-cards {
-        .card {
-          flex: 1 1 100%;
+          grid-column: span 1;
+          grid-row: auto;
         }
       }
     }

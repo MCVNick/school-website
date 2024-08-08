@@ -17,16 +17,18 @@ const App = () => {
         required. If you somehow have a device that is this small, contact me
         and I will attempt to make my site support the thing.
       </p>
-      <Router>
-        <Navbar />
-        <Routes>
-          <Route exact path="/" element={<Home />} />
-          <Route exact path="/about" element={<div />} />
-          <Route exact path="/contact" element={<div />} />
-          <Route exact path="/resources" element={<div />} />
-        </Routes>
-        <Footer />
-      </Router>
+      <div className="big-routes">
+        <Router>
+          <Navbar />
+          <Routes>
+            <Route exact path="/" element={<Home />} />
+            <Route exact path="/about" element={<div />} />
+            <Route exact path="/contact" element={<div />} />
+            <Route exact path="/resources" element={<div />} />
+          </Routes>
+          <Footer />
+        </Router>
+      </div>
     </div>
   );
 };
