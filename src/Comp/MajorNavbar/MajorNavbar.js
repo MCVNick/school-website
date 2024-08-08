@@ -44,7 +44,15 @@ const MajorNavbar = () => {
   };
 
   const handleSearch = () => {
-    console.log("Search query:", searchQuery);
+    navigate(`/resources?type=all&query=${searchQuery}`);
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      handleSearch();
+    } else if (event.key === "Escape") {
+      setShowSearchPopup(false);
+    }
   };
 
   const toggleSearchPopup = () => {
@@ -76,6 +84,7 @@ const MajorNavbar = () => {
             placeholder="Search"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
+            onKeyDown={handleKeyPress}
           />
           <button onClick={handleSearch}>Search</button>
         </div>
@@ -103,16 +112,45 @@ const MajorNavbar = () => {
             onClick={toggleSidebar}
           />
           <ul>
-            <li onClick={() => handleNavigation("/")}>Home</li>
-            <li onClick={() => handleNavigation("/about")}>About</li>
-            <li onClick={() => handleNavigation("/contact")}>Contact</li>
-            <li onClick={() => handleNavigation("/resources")}>Resources</li>
+            <li
+              onClick={() => {
+                handleNavigation("/");
+                toggleSidebar();
+              }}
+            >
+              Home
+            </li>
+            <li
+              onClick={() => {
+                handleNavigation("/about");
+                toggleSidebar();
+              }}
+            >
+              About
+            </li>
+            <li
+              onClick={() => {
+                handleNavigation("/contact");
+                toggleSidebar();
+              }}
+            >
+              Contact
+            </li>
+            <li
+              onClick={() => {
+                handleNavigation("/resources");
+                toggleSidebar();
+              }}
+            >
+              Resources
+            </li>
             <li>
               <input
                 type="text"
                 placeholder="Search"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
+                onKeyDown={handleKeyPress}
               />
               <button onClick={handleSearch}>Search</button>
             </li>
@@ -133,6 +171,7 @@ const MajorNavbar = () => {
             placeholder="Search"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
+            onKeyDown={handleKeyPress}
           />
           <button onClick={handleSearch}>Search</button>
         </div>
