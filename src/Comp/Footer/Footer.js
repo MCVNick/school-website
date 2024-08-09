@@ -34,7 +34,7 @@ const Footer = () => {
           </ul>
         </div>
         <div className="footer-section contact">
-          <h2>Contact Us</h2>
+          <h2>Contact Me</h2>
           <span>
             <FontAwesomeIcon icon={faEnvelope} />
             <p>ngmcqueen@graniteschools.org</p>
@@ -49,7 +49,7 @@ const Footer = () => {
           </span>
         </div>
         <div className="footer-section social">
-          <h2>Follow Us</h2>
+          <h2>Follow Me</h2>
           <div className="social-icons">
             <a href="https://github.com/MCVNick" aria-label="Github">
               <FontAwesomeIcon icon={faGithub} />

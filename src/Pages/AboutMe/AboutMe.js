@@ -20,32 +20,37 @@ const AboutMe = () => {
       <div className="about-main">
         <div className="about-page-content">
           <div className="left-col">
-            <div className="favorite-websites">
-              <img src={Me} alt="Profile" />
-              <h1>Favorite Websites and YouTube Videos</h1>
-              <div className="iframe-wrapper">
-                <iframe
-                  src="https://www.youtube.com/embed/ZBnvl7jlXXc"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  title="My YouTube Video"
-                />
-              </div>
-              <p>
-                If the video appears unusual, it's likely because it's in 360
-                degrees, and your device may not fully support 360-degree video
-                playback.
-              </p>
-              <div className="iframe-wrapper">
-                <iframe
-                  src="https://www.youtube.com/embed/CYouHk68V_I"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  title="My YouTube Video"
-                />
-              </div>
+            <img src={Me} alt="Me in a suit." />
+            <h1>Favorite Websites and YouTube Videos</h1>
+            <p>
+              If the video appears unusual, it's likely because it's in 360
+              degrees, and your device may not fully support 360-degree video
+              playback.
+            </p>
+            <h2>
+              <a href="https://www.youtube.com/channel/UCValB9rrklzk4Hgv9MKjiPA">
+                YouTube (MCVNick)
+              </a>
+            </h2>
+            <p>
+              I have my own YouTube channel that I use to record on. It's filled
+              with great tutorials and lots of fun videos. I've played many
+              different video games and find that this is an easy way to bond
+              with kids. While some believe that video games are bad, I believe
+              that they can provide a fun social activity for friends, peers,
+              and family. The video I have displayed is myself creating a
+              fantasy landscape I dreamed of while sleeping one night. Also, if
+              the video looks funny, it is because it is in 360 degrees, and
+              your device may not support 360-degree videos.
+            </p>
+            <div className="iframe-wrapper">
+              <iframe
+                src="https://www.youtube.com/embed/ZBnvl7jlXXc"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                title="My YouTube Video"
+              />
             </div>
-            <h1>Favorite Website</h1>
             <h2>
               <a href="https://www.youtube.com/channel/UCeKP_JERqsYh-rj9DqpMUgQ">
                 YouTube (9thEvermore)
@@ -59,6 +64,14 @@ const AboutMe = () => {
               create are truly stunning. To see more of their amazing work, be
               sure to subscribe to his channel on YouTube.
             </p>
+            <div className="iframe-wrapper">
+              <iframe
+                src="https://www.youtube.com/embed/CYouHk68V_I"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                title="My YouTube Video"
+              />
+            </div>
             <h2>
               {/* <a href="https://thewafulup.com">The Wafulup</a> */}
               The Wafulup

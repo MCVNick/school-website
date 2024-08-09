@@ -1,0 +1,161 @@
+@import "./../../vars";
+
+#contact-page {
+  .contact-page-container {
+    padding: map-get($marPad, normal);
+    align-content: center;
+
+    > h2 {
+      text-align: center;
+      font-weight: map-get($fontWeights, bold);
+    }
+
+    .header {
+      background-color: map-get($colors, secondary);
+      padding: map-get($marPad, normal);
+      text-align: center;
+      margin-bottom: map-get($marPad, large);
+
+      h1 {
+        font-size: map-get($textSizes, large);
+      }
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      max-width: 1000px;
+      margin: 0 auto;
+
+      .col-1,
+      .col-2 {
+        flex: 1;
+      }
+
+      span {
+        display: flex;
+        justify-content: center;
+
+        p {
+          margin-left: map-get($marPad, small);
+        }
+      }
+
+      h2 {
+        font-size: map-get($textSizes, small);
+        margin: map-get($marPad, small) 0;
+      }
+
+      .photo-of-me-container {
+        margin: map-get($marPad, small) 0;
+
+        .photo-of-me {
+          max-width: 70%;
+          height: auto;
+          border-radius: 50%;
+        }
+      }
+
+      .no-top-padding {
+        margin-top: 0;
+      }
+    }
+
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: map-get($marPad, small);
+      margin-top: map-get($marPad, large);
+
+      a {
+        img {
+          width: 25px;
+          height: 25px;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: map-get($breakpoints, tablet)) {
+  #contact-page {
+    .contact-page-container {
+      .header {
+        padding: map-get($marPad, large);
+
+        h1 {
+          font-size: map-get($textSizes, xLarge);
+        }
+      }
+
+      .contact-info {
+        flex-direction: column;
+
+        h2 {
+          font-size: map-get($textSizes, normal);
+        }
+
+        .photo-of-me-container {
+          margin: map-get($marPad, normal) 0;
+
+          .photo-of-me {
+            max-width: 80%;
+          }
+        }
+      }
+
+      .social-icons {
+        gap: map-get($marPad, normal);
+
+        a {
+          img {
+            width: 30px;
+            height: 30px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: map-get($breakpoints, laptop)) {
+  #contact-page {
+    .contact-page-container {
+      .header {
+        padding: map-get($marPad, xxxLarge);
+
+        h1 {
+          font-size: map-get($textSizes, xxLarge);
+        }
+      }
+
+      .contact-info {
+        flex-direction: row;
+        h2 {
+          font-size: map-get($textSizes, large);
+        }
+
+        .photo-of-me-container {
+          margin: map-get($marPad, normal) 0;
+
+          .photo-of-me {
+            max-width: 100%;
+            height: 600px;
+          }
+        }
+      }
+
+      .social-icons {
+        gap: map-get($marPad, normal);
+
+        a {
+          img {
+            width: 40px;
+            height: 40px;
+          }
+        }
+      }
+    }
+  }
+}

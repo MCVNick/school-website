@@ -7,6 +7,7 @@ import Footer from "./Comp/Footer/Footer";
 import Home from "./Pages/Home/Home";
 import AboutMe from "./Pages/AboutMe/AboutMe";
 import NotFound from "./Pages/NotFound/NotFound";
+import Contact from "./Pages/Contact/Contact";
 
 import "./reset.scss";
 import "./App.scss";
@@ -27,7 +28,7 @@ const App = () => {
               <Routes>
                 <Route exact path="/" element={<Home />} />
                 <Route exact path="/about" element={<AboutMe />} />
-                <Route exact path="/contact" element={<div />} />
+                <Route exact path="/contact" element={<Contact />} />
                 <Route exact path="/resources" element={<div />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
