@@ -64,7 +64,7 @@
 
       .right-container {
         max-width: 800px;
-        padding: map-get($marPad, normal);
+        margin-top: map-get($marPad, normal);
 
         h2 {
           font-size: map-get($textSizes, large);

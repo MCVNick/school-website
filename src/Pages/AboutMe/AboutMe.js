@@ -32,8 +32,9 @@ const AboutMe = () => {
                 />
               </div>
               <p>
-                If the video looks funny, it is because it is in 360 degrees,
-                and your device may not support 360-degree videos.
+                If the video appears unusual, it's likely because it's in 360
+                degrees, and your device may not fully support 360-degree video
+                playback.
               </p>
               <div className="iframe-wrapper">
                 <iframe
@@ -51,40 +52,41 @@ const AboutMe = () => {
               </a>
             </h2>
             <p>
-              Big shout out to John Arthur and his students for doing amazing
-              things at Meadowlark Elementary! John has a YouTube channel named
-              after his class (9thEvermore) where his students can have an
-              authentic audience where his students' voices are heard. The music
-              videos his kids make are stunning. To see more, subscribe to him
-              on YouTube.
+              A big shoutout to John Arthur and his students for the incredible
+              work they're doing at Meadowlark Elementary! John's YouTube
+              channel, 9thEvermore, provides his students with an authentic
+              platform where their voices can be heard. The music videos they
+              create are truly stunning. To see more of their amazing work, be
+              sure to subscribe to his channel on YouTube.
             </p>
             <h2>
               {/* <a href="https://thewafulup.com">The Wafulup</a> */}
               The Wafulup
             </h2>
             <p>
-              The Wafulup is a website idea that my brother came up with a while
-              ago. The idea is that there are hidden links over the top of a
-              bland website that will direct you to various places on the web
-              that are interesting and engaging. Each website is hand-selected
-              by me, so the only links that appear are ones I have approved. The
-              links on the page will randomize with every refresh of the page. I
-              haven't gone through and updated the links in a while, so there
-              might be some 404 pages.
+              The Wafulup is a creative website concept that my brother and I
+              developed some time ago. The idea is simple yet engaging: hidden
+              links are placed over a seemingly bland website, each leading to
+              fascinating and carefully curated destinations on the web. Every
+              link is handpicked by me, ensuring only the most interesting
+              content makes the cut. With each refresh of the page, the links
+              are randomized, offering a new experience every time. However,
+              it's been a while since I last updated the links, so you might
+              come across a few 404 pages.
             </p>
           </div>
           <div className="right-container">
             <h2>Introduction</h2>
             <p>
               My name is Nick McQueen, and I am proud to be an educator, though
-              it wasn’t the path I initially imagined for myself. I began my
+              it wasn't the path I initially imagined for myself. I began my
               journey in college pursuing computer science, drawn by the promise
               of innovation and a lucrative career. However, along the way, I
               discovered a deep-seated passion for working with children. The
               joy and fulfillment I found in teaching quickly overshadowed my
               interest in computers, leading me to a profound realization: my
               true calling was in education. Shifting my focus was one of the
-              best decisions I’ve ever made, and I haven’t looked back since.
+              best decisions I've ever made, and I haven't looked back since.
             </p>
             <p>
               Beyond the classroom, I spend my summers as a canoe instructor at
@@ -97,7 +99,7 @@ const AboutMe = () => {
             </p>
             <p>
               My approach to education is rooted in the belief that every child
-              has unique potential, and it’s my privilege to help unlock it. I
+              has unique potential, and it's my privilege to help unlock it. I
               invite you to learn more about my educational philosophy and how I
               approach teaching by visiting the{" "}
               <span
