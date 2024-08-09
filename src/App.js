@@ -6,6 +6,7 @@ import Footer from "./Comp/Footer/Footer";
 
 import Home from "./Pages/Home/Home";
 import AboutMe from "./Pages/AboutMe/AboutMe";
+import NotFound from "./Pages/NotFound/NotFound";
 
 import "./reset.scss";
 import "./App.scss";
@@ -20,14 +21,19 @@ const App = () => {
       </p>
       <div className="big-routes">
         <Router>
-          <Navbar />
-          <Routes>
-            <Route exact path="/" element={<Home />} />
-            <Route exact path="/about" element={<AboutMe />} />
-            <Route exact path="/contact" element={<div />} />
-            <Route exact path="/resources" element={<div />} />
-          </Routes>
-          <Footer />
+          <div className="app-container">
+            <Navbar />
+            <div className="app-content">
+              <Routes>
+                <Route exact path="/" element={<Home />} />
+                <Route exact path="/about" element={<AboutMe />} />
+                <Route exact path="/contact" element={<div />} />
+                <Route exact path="/resources" element={<div />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </div>
+            <Footer />
+          </div>
         </Router>
       </div>
     </div>

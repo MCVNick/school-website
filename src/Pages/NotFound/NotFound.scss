@@ -1,0 +1,67 @@
+@import "../../vars";
+
+.not-found {
+  background: url("../../Utils/Assets/Backgrounds/404.webp") no-repeat center center;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: map-get($marPad, large);
+  flex-grow: 1;
+
+  .content-wrapper {
+    background-color: rgba(255, 255, 255, 0.8); // Semi-transparent white background
+    padding: map-get($marPad, large);
+    border-radius: map-get($marPad, small);
+    text-align: center;
+  }
+
+  h1 {
+    font-size: map-get($textSizes, xxLarge);
+    font-weight: map-get($fontWeights, bold);
+    margin-bottom: map-get($marPad, normal);
+  }
+
+  p {
+    font-size: map-get($textSizes, normal);
+    margin-bottom: map-get($marPad, small);
+  }
+
+  .icon {
+    color: map-get($colors, errorRed);
+    font-size: map-get($textSizes, xxxLarge);
+    margin-bottom: map-get($marPad, normal);
+  }
+}
+
+@media (min-width: map-get($breakpoints, tablet)) {
+  .not-found {
+    h1 {
+      font-size: map-get($textSizes, xxxLarge);
+    }
+
+    p {
+      font-size: map-get($textSizes, large);
+    }
+
+    .icon {
+      font-size: map-get($textSizes, xxxLarge);
+    }
+  }
+}
+
+@media (min-width: map-get($breakpoints, laptop)) {
+  .not-found {
+    h1 {
+      font-size: map-get($textSizes, xxxLarge);
+    }
+
+    p {
+      font-size: map-get($textSizes, large);
+    }
+
+    .icon {
+      font-size: map-get($textSizes, xxxLarge);
+    }
+  }
+}

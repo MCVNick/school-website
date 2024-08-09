@@ -1,26 +1,39 @@
 @import "vars";
 
-@media (min-width: 0) {
-  .App {
-    overflow: hidden;
-    background-color: map-get($colors, mainBackground);
+.App {
+  overflow: hidden;
+  background-color: map-get($colors, mainBackground);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 
-    > .not-supported {
-      display: initial;
-      width: 100vw;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-content: center;
-      justify-content: center;
-      align-items: center;
-      justify-items: center;
-    }
-
-    > .big-routes {
-      display: none;
-    }
+  > .not-supported {
+    display: initial;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
   }
+
+  > .big-routes {
+    display: none;
+  }
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 @media (min-width: 300px) {
