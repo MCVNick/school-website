@@ -1,0 +1,138 @@
+@import "./../../vars";
+
+.about {
+  padding: map-get($marPad, normal);
+
+  .about-header {
+    background-color: map-get($colors, secondary);
+    padding: map-get($marPad, xxxLarge);
+    text-align: center;
+
+    h1 {
+      font-size: map-get($textSizes, xxLarge);
+    }
+  }
+
+  .about-main {
+    .about-page-content {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start; // Ensure columns align at the top
+
+      .left-col {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-bottom: map-get($marPad, normal);
+
+        img {
+          max-width: 100%;
+          height: auto;
+          margin-bottom: map-get($marPad, normal);
+        }
+
+        .favorite-websites {
+          width: 100%;
+          margin-top: map-get($marPad, large);
+
+          .iframe-wrapper {
+            display: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            margin-bottom: map-get($marPad, normal);
+
+            iframe {
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+            }
+          }
+        }
+
+        h1,
+        h2 {
+          margin-bottom: map-get($marPad, normal);
+          font-size: map-get($textSizes, large);
+        }
+
+        p {
+          margin-bottom: map-get($marPad, normal);
+        }
+      }
+
+      .right-container {
+        max-width: 800px;
+        padding: map-get($marPad, normal);
+
+        h2 {
+          font-size: map-get($textSizes, large);
+          margin-bottom: map-get($marPad, small);
+        }
+
+        h2,
+        h3 {
+          font-size: map-get($textSizes, large);
+          margin-bottom: map-get($marPad, small);
+
+          a {
+            text-decoration: none;
+            color: map-get($colors, primary);
+          }
+        }
+
+        p {
+          font-size: map-get($textSizes, normal);
+          margin-bottom: map-get($marPad, normal);
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: map-get($breakpoints, tablet)) {
+  .about {
+    .about-main {
+      .about-page-content {
+        flex-direction: row;
+        justify-content: space-between;
+
+        .left-col {
+          flex: 1;
+          max-width: 33%;
+        }
+
+        .right-container {
+          flex: 2;
+          padding-left: map-get($marPad, large);
+          max-width: 66%;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: map-get($breakpoints, laptop)) {
+  .about {
+    .about-header {
+      h1 {
+        font-size: map-get($textSizes, xxxLarge);
+      }
+    }
+
+    .about-main {
+      .about-page-content {
+        .right-container {
+          h2 {
+            font-size: map-get($textSizes, xLarge);
+          }
+
+          p {
+            font-size: map-get($textSizes, large);
+          }
+        }
+      }
+    }
+  }
+}

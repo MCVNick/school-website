@@ -5,6 +5,7 @@ import Navbar from "./Comp/MajorNavbar/MajorNavbar";
 import Footer from "./Comp/Footer/Footer";
 
 import Home from "./Pages/Home/Home";
+import AboutMe from "./Pages/AboutMe/AboutMe";
 
 import "./reset.scss";
 import "./App.scss";
@@ -22,7 +23,7 @@ const App = () => {
           <Navbar />
           <Routes>
             <Route exact path="/" element={<Home />} />
-            <Route exact path="/about" element={<div />} />
+            <Route exact path="/about" element={<AboutMe />} />
             <Route exact path="/contact" element={<div />} />
             <Route exact path="/resources" element={<div />} />
           </Routes>
