@@ -1,0 +1,52 @@
+@import "./../../vars";
+
+#philosophy-page {
+  .philosophy-page-container {
+    padding: map-get($marPad, normal);
+
+    .header {
+      background-color: map-get($colors, secondary);
+      padding: map-get($marPad, xxxLarge);
+      text-align: center;
+
+      h1 {
+        font-size: map-get($textSizes, xxLarge);
+      }
+    }
+
+    .philosophy-content {
+      max-width: 800px;
+      margin: 0 auto;
+      line-height: 1.6;
+      color: map-get($colors, slate);
+
+      p {
+        margin-bottom: map-get($marPad, normal);
+      }
+    }
+  }
+
+  @media (min-width: map-get($breakpoints, tablet)) {
+    .philosophy-page-container {
+      .philosophy-content {
+        max-width: 800px;
+      }
+    }
+  }
+
+  @media (min-width: map-get($breakpoints, laptop)) {
+    .philosophy-page-container {
+      .philosophy-content {
+        max-width: 1000px;
+      }
+    }
+  }
+
+  @media (min-width: map-get($breakpoints, desktop)) {
+    .philosophy-page-container {
+      .philosophy-content {
+        max-width: 1200px;
+      }
+    }
+  }
+}

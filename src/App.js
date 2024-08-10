@@ -9,6 +9,7 @@ import AboutMe from "./Pages/AboutMe/AboutMe";
 import NotFound from "./Pages/NotFound/NotFound";
 import Contact from "./Pages/Contact/Contact";
 import Resources from "./Pages/Resources/Resrouces";
+import Philosophy from "./Pages/Philosophy/Philosophy";
 
 import "./reset.scss";
 import "./App.scss";
@@ -31,6 +32,11 @@ const App = () => {
                 <Route exact path="/about" element={<AboutMe />} />
                 <Route exact path="/contact" element={<Contact />} />
                 <Route exact path="/resources" element={<Resources />} />
+                <Route
+                  exact
+                  path="/about/philosophy"
+                  element={<Philosophy />}
+                />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </div>
