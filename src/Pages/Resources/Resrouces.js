@@ -38,6 +38,7 @@ const Resources = () => {
       title: "Resource 1",
       description: "Description 1",
       internalLink: "/internal1",
+      type: "student",
     },
     {
       id: 2,
@@ -45,19 +46,21 @@ const Resources = () => {
       description: "Description 2",
       externalLink: "https://example.com",
       externalLinkTitle: "Visit Example",
+      type: "teacher",
     },
     {
       id: 3,
       title: "Resource 3",
       description: "Description 3",
-      photo: "https://via.placeholder.com/700x200",
-      photoAlt: "Photo Alt Text",
+      photo: "path/to/photo.jpg",
+      type: "parent",
     },
     {
       id: 4,
       title: "Resource 4",
       description: "Description 4",
       iframe: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      type: "student-work",
     },
     // Add more resources as needed
   ];
@@ -78,9 +81,14 @@ const Resources = () => {
     navigate(internalLink);
   };
 
-  const filteredResources = resources.filter((resource) =>
-    resource.title.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredResources = resources.filter((resource) => {
+    const matchesSearchQuery = resource.title
+      .toLowerCase()
+      .includes(searchQuery.toLowerCase());
+    const matchesResourceType =
+      resourceType === "all" || resource.type === resourceType;
+    return matchesSearchQuery && matchesResourceType;
+  });
 
   const indexOfLastResource = currentPage * resourcesPerPage;
   const indexOfFirstResource = indexOfLastResource - resourcesPerPage;
@@ -168,7 +176,7 @@ const Resources = () => {
             <p>{resource.description}</p>
             <div className="content">
               {resource.photo && (
-                <img src={resource.photo} alt={resource.photoAlt} />
+                <img src={resource.photo} alt={resource.title} />
               )}
               {resource.iframe && (
                 <iframe src={resource.iframe} title={resource.title} />
@@ -186,33 +194,35 @@ const Resources = () => {
           </div>
         ))}
       </div>
-      <div className="pagination">
-        <button
-          onClick={() => handlePageChange(1)}
-          disabled={currentPage === 1}
-        >
-          <FontAwesomeIcon icon={faAngleDoubleLeft} />
-        </button>
-        <button
-          onClick={() => handlePageChange(currentPage - 1)}
-          disabled={currentPage === 1}
-        >
-          <FontAwesomeIcon icon={faAngleLeft} />
-        </button>
-        {renderPageNumbers()}
-        <button
-          onClick={() => handlePageChange(currentPage + 1)}
-          disabled={currentPage === totalPages}
-        >
-          <FontAwesomeIcon icon={faAngleRight} />
-        </button>
-        <button
-          onClick={() => handlePageChange(totalPages)}
-          disabled={currentPage === totalPages}
-        >
-          <FontAwesomeIcon icon={faAngleDoubleRight} />
-        </button>
-      </div>
+      {resources.length > 9 && (
+        <div className="pagination">
+          <button
+            onClick={() => handlePageChange(1)}
+            disabled={currentPage === 1}
+          >
+            <FontAwesomeIcon icon={faAngleDoubleLeft} />
+          </button>
+          <button
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+          >
+            <FontAwesomeIcon icon={faAngleLeft} />
+          </button>
+          {renderPageNumbers()}
+          <button
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+          >
+            <FontAwesomeIcon icon={faAngleRight} />
+          </button>
+          <button
+            onClick={() => handlePageChange(totalPages)}
+            disabled={currentPage === totalPages}
+          >
+            <FontAwesomeIcon icon={faAngleDoubleRight} />
+          </button>
+        </div>
+      )}
     </div>
   );
 };

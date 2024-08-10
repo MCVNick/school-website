@@ -114,14 +114,14 @@ const AboutMe = () => {
               My approach to education is rooted in the belief that every child
               has unique potential, and it's my privilege to help unlock it. I
               invite you to learn more about my educational philosophy and how I
-              approach teaching by visiting the{" "}
+              approach teaching by clicking the{" "}
               <span
                 style={{ cursor: "pointer", textDecoration: "underline" }}
                 onClick={handleNavigation}
               >
                 "Philosophy"
               </span>{" "}
-              tab under the "About" on the main navigation bar.
+              hyperlink.
             </p>
             <h2>Education</h2>
             <h3>Westminster College</h3>
