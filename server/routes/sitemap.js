@@ -20,7 +20,7 @@ const generateSitemap = async (req, res) => {
 
     smStream.write({ url: "/", changefreq: "daily", priority: 1.0 });
     smStream.write({ url: "/about", changefreq: "daily", priority: 1.0 });
-    smStream.write({ url: "/philosophy", changefreq: "daily", priority: 0.75 });
+    smStream.write({ url: "/about/philosophy", changefreq: "daily", priority: 0.75 });
     smStream.write({ url: "/contact", changefreq: "daily", priority: 0.5 });
     smStream.write({ url: "/resources", changefreq: "daily", priority: 0.25 });
     smStream.end();
