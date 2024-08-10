@@ -8,6 +8,7 @@ import Home from "./Pages/Home/Home";
 import AboutMe from "./Pages/AboutMe/AboutMe";
 import NotFound from "./Pages/NotFound/NotFound";
 import Contact from "./Pages/Contact/Contact";
+import Resources from "./Pages/Resources/Resrouces";
 
 import "./reset.scss";
 import "./App.scss";
@@ -29,7 +30,7 @@ const App = () => {
                 <Route exact path="/" element={<Home />} />
                 <Route exact path="/about" element={<AboutMe />} />
                 <Route exact path="/contact" element={<Contact />} />
-                <Route exact path="/resources" element={<div />} />
+                <Route exact path="/resources" element={<Resources />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </div>
