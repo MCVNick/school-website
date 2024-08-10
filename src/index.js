@@ -1,15 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
-import App from "./App";
+import { ApolloProvider } from "@apollo/client";
+
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration.js";
 import reportWebVitals from "./reportWebVitals";
+import client from './apolloClient';
+import App from "./App";
+import "./index.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <ApolloProvider client={client}>
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  </ApolloProvider>
 );
 
 // Register the service worker

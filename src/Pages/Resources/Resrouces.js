@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useQuery, gql } from "@apollo/client";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAngleLeft,
@@ -9,6 +10,22 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import "./Resources.scss";
+
+const GET_RESOURCE_CARDS = gql`
+  query GetResourceCards {
+    getResourceCards {
+      id
+      title
+      description
+      internalLink
+      externalLink
+      externalLinkTitle
+      photo
+      iframe
+      type
+    }
+  }
+`;
 
 const Resources = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -31,39 +48,46 @@ const Resources = () => {
     }
   }, [location.search]);
 
-  const resources = [
-    // Dummy data for resources
-    {
-      id: 1,
-      title: "Resource 1",
-      description: "Description 1",
-      internalLink: "/internal1",
-      type: "student",
-    },
-    {
-      id: 2,
-      title: "Resource 2",
-      description: "Description 2",
-      externalLink: "https://example.com",
-      externalLinkTitle: "Visit Example",
-      type: "teacher",
-    },
-    {
-      id: 3,
-      title: "Resource 3",
-      description: "Description 3",
-      photo: "path/to/photo.jpg",
-      type: "parent",
-    },
-    {
-      id: 4,
-      title: "Resource 4",
-      description: "Description 4",
-      iframe: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-      type: "student-work",
-    },
-    // Add more resources as needed
-  ];
+  // const resources = [
+  //   // Dummy data for resources
+  //   {
+  //     id: 1,
+  //     title: "Resource 1",
+  //     description: "Description 1",
+  //     internalLink: "/internal1",
+  //     type: "student",
+  //   },
+  //   {
+  //     id: 2,
+  //     title: "Resource 2",
+  //     description: "Description 2",
+  //     externalLink: "https://example.com",
+  //     externalLinkTitle: "Visit Example",
+  //     type: "teacher",
+  //   },
+  //   {
+  //     id: 3,
+  //     title: "Resource 3",
+  //     description: "Description 3",
+  //     photo: "path/to/photo.jpg",
+  //     type: "parent",
+  //   },
+  //   {
+  //     id: 4,
+  //     title: "Resource 4",
+  //     description: "Description 4",
+  //     iframe: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+  //     type: "student-work",
+  //   },
+  //   // Add more resources as needed
+  // ];
+
+  const { loading, error, data } = useQuery(GET_RESOURCE_CARDS);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+
+  const resources = data.getResourceCards;
 
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
