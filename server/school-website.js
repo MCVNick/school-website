@@ -17,7 +17,13 @@ const { SERVER_PORT } = process.env;
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(
+  cors({
+    origin: ["http://localhost:3000", "https://your-production-domain.com"],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    credentials: true,
+  })
+);
 app.use(compression());
 app.use(json());
 
