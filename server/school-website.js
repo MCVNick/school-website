@@ -10,20 +10,12 @@ const { typeDefs } = require("./graphql/schema");
 const { resolvers } = require("./graphql/resolvers");
 const generateSitemap = require("./routes/sitemap");
 const setupGzip = require("./utils/gzip");
-const cors = require("cors");
 
 const { SERVER_PORT } = process.env;
 
 const app = express();
 
 // Middleware
-app.use(
-  cors({
-    origin: ["http://localhost:3000", "https://your-production-domain.com"],
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    credentials: true,
-  })
-);
 app.use(compression());
 app.use(json());
 
