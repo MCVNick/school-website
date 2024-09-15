@@ -15,8 +15,8 @@ const Home = () => {
           <section className="card announcements small">
             <h2>Announcements</h2>
             <div className="scrollable-content">
-              <p>Check out the latest announcements here.</p>
-              {/* Add more announcements here */}
+              <p>SEP conferences Monday (9/16) and Tuesday (9/17)</p>
+              <p>Short day on Thursday (9/19)</p>
             </div>
           </section>
           <section className="card calendar medium">
@@ -36,8 +36,8 @@ const Home = () => {
           <section className="card assignments small">
             <h2>Assignments</h2>
             <div className="scrollable-content">
-              <p>Check out the latest homework and project assignments.</p>
-              {/* Add more assignments here */}
+              <p>iReady is always available on clever.</p>
+              <p>Lexia Core 5 is always available on clever.</p>
             </div>
           </section>
         </div>

@@ -52,27 +52,6 @@ const AboutMe = () => {
               />
             </div>
             <h2>
-              <a href="https://www.youtube.com/channel/UCeKP_JERqsYh-rj9DqpMUgQ">
-                YouTube (9thEvermore)
-              </a>
-            </h2>
-            <p>
-              A big shoutout to John Arthur and his students for the incredible
-              work they're doing at Meadowlark Elementary! John's YouTube
-              channel, 9thEvermore, provides his students with an authentic
-              platform where their voices can be heard. The music videos they
-              create are truly stunning. To see more of their amazing work, be
-              sure to subscribe to his channel on YouTube.
-            </p>
-            <div className="iframe-wrapper">
-              <iframe
-                src="https://www.youtube.com/embed/CYouHk68V_I"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                title="My YouTube Video"
-              />
-            </div>
-            <h2>
               {/* <a href="https://thewafulup.com">The Wafulup</a> */}
               The Wafulup
             </h2>
