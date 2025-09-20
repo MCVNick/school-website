@@ -38,11 +38,7 @@ const Contact = () => {
             <h2>Contact Me</h2>
             <span>
               <FontAwesomeIcon icon={faEnvelope} />
-              <p>ngmcqueen@graniteschools.org</p>
-            </span>
-            <span>
-              <FontAwesomeIcon icon={faPhone} />
-              <p>+1 (385) 646-0526</p>
+              <p>nickmcqueen@alpinedistrict.org</p>
             </span>
             <span>
               <FontAwesomeIcon icon={faMessage} />

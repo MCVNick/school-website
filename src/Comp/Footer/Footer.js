@@ -37,11 +37,7 @@ const Footer = () => {
           <h2>Contact Me</h2>
           <span>
             <FontAwesomeIcon icon={faEnvelope} />
-            <p>ngmcqueen@graniteschools.org</p>
-          </span>
-          <span>
-            <FontAwesomeIcon icon={faPhone} />
-            <p>+1 (385) 646-0526</p>
+            <p>nickmcqueen@alpinedistrict.org</p>
           </span>
           <span>
             <FontAwesomeIcon icon={faMessage} />
@@ -62,7 +58,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="footer-bottom">
-        <p>&copy; 2024 Mr. McQueen's Class. All rights reserved.</p>
+        <p>&copy; 2025 Mr. McQueen's Class. All rights reserved.</p>
       </div>
     </footer>
   );
