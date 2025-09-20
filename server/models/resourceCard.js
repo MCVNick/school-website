@@ -1,4 +1,3 @@
-// models/resourceCard.js
 const pool = require("../utils/db");
 
 const getResourceCards = async () => {

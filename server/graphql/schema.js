@@ -2,6 +2,18 @@
 const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
+  type Announcement {
+    id: ID!
+    text: String!
+    order: Int
+  }
+
+  type Assignment {
+    id: ID!
+    text: String!
+    order: Int
+  }
+
   type ResourceCard {
     id: ID!
     title: String!
@@ -17,6 +29,9 @@ const typeDefs = gql`
   type Query {
     getResourceCards: [ResourceCard]
     getResourceCard(id: ID!): ResourceCard
+
+    getAnnouncements: [Announcement]
+    getAssignments: [Assignment]
   }
 
   type Mutation {

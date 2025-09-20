@@ -5,19 +5,18 @@ const {
   createResourceCard,
 } = require("../models/resourceCard");
 
+const { getAnnouncements } = require("../models/announcement");
+const { getAssignments } = require("../models/assignment");
+
 const resolvers = {
   Query: {
-    getResourceCards: async () => {
-      return await getResourceCards();
-    },
-    getResourceCard: async (_, { id }) => {
-      return await getResourceCard(id);
-    },
+    getResourceCards: async () => getResourceCards(),
+    getResourceCard: async (_, { id }) => getResourceCard(id),
+    getAnnouncements: async () => getAnnouncements(),
+    getAssignments: async () => getAssignments(),
   },
   Mutation: {
-    createResourceCard: async (_, args) => {
-      return await createResourceCard(args);
-    },
+    createResourceCard: async (_, args) => createResourceCard(args),
   },
 };
 

@@ -1,9 +1,36 @@
 import React from "react";
+import { gql, useQuery } from "@apollo/client";
 import Schedule from "../../Comp/Schedule/Schedule";
 
 import "./Home.scss";
 
+const GET_ANNOUNCEMENTS = gql`
+  query GetAnnouncements {
+    getAnnouncements {
+      id
+      text
+      order
+    }
+  }
+`;
+
+const GET_ASSIGNMENTS = gql`
+  query GetAssignments {
+    getAssignments {
+      id
+      text
+      order
+    }
+  }
+`;
+
 const Home = () => {
+  const { data: annData } = useQuery(GET_ANNOUNCEMENTS);
+  const { data: asgData } = useQuery(GET_ASSIGNMENTS);
+
+  const announcements = annData?.getAnnouncements ?? [];
+  const assignments = asgData?.getAssignments ?? [];
+
   return (
     <div className="home">
       <header className="home-header">
@@ -15,8 +42,11 @@ const Home = () => {
           <section className="card announcements small">
             <h2>Announcements</h2>
             <div className="scrollable-content">
-              <p>Website Updated (9/20/2025)</p>
-              <p></p>
+              {announcements.length === 0 ? (
+                <p>No announcements.</p>
+              ) : (
+                announcements.map((a) => <p key={a.id}>{a.text}</p>)
+              )}
             </div>
           </section>
           <section className="card calendar medium">
@@ -36,8 +66,12 @@ const Home = () => {
           <section className="card assignments small">
             <h2>Assignments</h2>
             <div className="scrollable-content">
-              <p>Check out Google Classroom for assignments.</p>
-              <p>Log into clever to get into Google Classroom.</p>
+              {" "}
+              {assignments.length === 0 ? (
+                <p>No assignments.</p>
+              ) : (
+                assignments.map((a) => <p key={a.id}>{a.text}</p>)
+              )}
             </div>
           </section>
         </div>
