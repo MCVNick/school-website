@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useQuery, gql } from "@apollo/client";
+import { gql } from "@apollo/client";
+import { useQuery } from "@apollo/client/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAngleLeft,
@@ -39,48 +40,10 @@ const Resources = () => {
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const query = params.get("query");
-    const resourceType = params.get("type");
-    if (query) {
-      setSearchQuery(query);
-    }
-    if (resourceType) {
-      setResourceType(resourceType);
-    }
+    const resourceTypeParam = params.get("type");
+    if (query) setSearchQuery(query);
+    if (resourceTypeParam) setResourceType(resourceTypeParam);
   }, [location.search]);
-
-  // const resources = [
-  //   // Dummy data for resources
-  //   {
-  //     id: 1,
-  //     title: "Resource 1",
-  //     description: "Description 1",
-  //     internalLink: "/internal1",
-  //     type: "student",
-  //   },
-  //   {
-  //     id: 2,
-  //     title: "Resource 2",
-  //     description: "Description 2",
-  //     externalLink: "https://example.com",
-  //     externalLinkTitle: "Visit Example",
-  //     type: "teacher",
-  //   },
-  //   {
-  //     id: 3,
-  //     title: "Resource 3",
-  //     description: "Description 3",
-  //     photo: "path/to/photo.jpg",
-  //     type: "parent",
-  //   },
-  //   {
-  //     id: 4,
-  //     title: "Resource 4",
-  //     description: "Description 4",
-  //     iframe: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-  //     type: "student-work",
-  //   },
-  //   // Add more resources as needed
-  // ];
 
   const { loading, error, data } = useQuery(GET_RESOURCE_CARDS);
 
@@ -89,21 +52,10 @@ const Resources = () => {
 
   const resources = data.getResourceCards;
 
-  const handleSearchChange = (e) => {
-    setSearchQuery(e.target.value);
-  };
-
-  const handleResourceTypeChange = (e) => {
-    setResourceType(e.target.value);
-  };
-
-  const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
-
-  const handleCardClick = (internalLink) => {
-    navigate(internalLink);
-  };
+  const handleSearchChange = (e) => setSearchQuery(e.target.value);
+  const handleResourceTypeChange = (e) => setResourceType(e.target.value);
+  const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
+  const handleCardClick = (internalLink) => navigate(internalLink);
 
   const filteredResources = resources.filter((resource) => {
     const matchesSearchQuery = resource.title

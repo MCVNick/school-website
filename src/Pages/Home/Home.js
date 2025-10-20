@@ -1,5 +1,5 @@
-import React from "react";
-import { gql, useQuery } from "@apollo/client";
+import { gql } from "@apollo/client";
+import { useQuery } from "@apollo/client/react";
 import Schedule from "../../Comp/Schedule/Schedule";
 
 import "./Home.scss";
@@ -66,7 +66,6 @@ const Home = () => {
           <section className="card assignments small">
             <h2>Assignments</h2>
             <div className="scrollable-content">
-              {" "}
               {assignments.length === 0 ? (
                 <p>No assignments.</p>
               ) : (

@@ -1,5 +1,3 @@
-import React from "react";
-
 import schedule from "../../Utils/Assets/Schedule/schedule.webp";
 
 import "./Schedule.scss";

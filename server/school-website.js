@@ -1,45 +1,44 @@
-// school-website.js
-require("dotenv").config(); // Ensure this is at the very top
+require("dotenv").config();
 
 const express = require("express");
-const { json } = require("express");
 const compression = require("compression");
 const path = require("path");
 const { ApolloServer } = require("apollo-server-express");
+
 const { typeDefs } = require("./graphql/schema");
 const { resolvers } = require("./graphql/resolvers");
 const generateSitemap = require("./routes/sitemap");
 const setupGzip = require("./utils/gzip");
 
-const { SERVER_PORT } = process.env;
+const PORT = Number(process.env.SERVER_PORT) || 4000;
 
-const app = express();
+async function start() {
+  const app = express();
 
-// Middleware
-app.use(compression());
-app.use(json());
+  app.use(compression());
+  app.use(express.json());
 
-// Serve static files
-app.use(express.static(`${__dirname}/../build`));
-setupGzip(app);
+  const buildDir = path.join(__dirname, "../build");
+  app.use(express.static(buildDir));
 
-// Sitemap endpoint
-app.get("/sitemap.xml", generateSitemap);
+  setupGzip(app);
 
-// Start the server
-async function startServer() {
+  app.get("/sitemap.xml", generateSitemap);
+
   const server = new ApolloServer({ typeDefs, resolvers });
   await server.start();
   server.applyMiddleware({ app, path: "/graphql", gui: false });
 
-  app.listen(SERVER_PORT, () => {
-    console.log("The server is running on port", SERVER_PORT || 3000);
+  app.get(/.*/, (req, res) => {
+    res.sendFile(path.join(buildDir, "index.html"));
   });
 
-  // Default route
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../build/index.html"));
+  app.listen(PORT, () => {
+    console.log("The server is running on port", PORT);
   });
 }
 
-startServer();
+start().catch((err) => {
+  console.error("Failed to start server:", err);
+  process.exit(1);
+});
