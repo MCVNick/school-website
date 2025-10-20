@@ -1,19 +1,27 @@
-import { Suspense, useMemo, lazy } from "react";
+import { Suspense, useMemo, lazy, useEffect } from "react";
 import { useParams, useLocation } from "react-router-dom";
+
+import { useLayout } from "../../Utils/Context/LayoutContext"
 
 const modules = require.context("./", true, /\.jsx?$/);
 
 export default function ResourceDynamic() {
   const { id, grade, subject, standard, file } = useParams();
   const location = useLocation();
+  const { setShowLayout } = useLayout();
+
+  useEffect(() => {
+    return () => {
+      setShowLayout(true);
+    };
+  }, [setShowLayout]);
 
   const relPath = useMemo(() => {
     if (id) return `./${id}.js`;
-
     return `./${grade}/${subject}/${standard}/${file}`;
   }, [id, grade, subject, standard, file]);
 
-  const { LazyComp, notFound } = useMemo(() => {
+  const { LazyComp } = useMemo(() => {
     const keys = modules.keys();
     if (keys.includes(relPath)) {
       const Lazy = lazy(async () => modules(relPath));

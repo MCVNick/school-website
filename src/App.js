@@ -1,10 +1,4 @@
-// src/App.js
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Navigate,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Navbar from "./Comp/MajorNavbar/MajorNavbar";
 import Footer from "./Comp/Footer/Footer";
@@ -15,12 +9,15 @@ import NotFound from "./Pages/NotFound/NotFound";
 import Contact from "./Pages/Contact/Contact";
 import Resources from "./Pages/Resources/Resrouces";
 import Philosophy from "./Pages/Philosophy/Philosophy";
-import ResourceDynamic from "./Pages/Resource/ResourceDynamic"; // ⬅️ NEW
+import ResourceDynamic from "./Pages/Resource/ResourceDynamic";
+import { LayoutProvider, useLayout } from "./Utils/Context/LayoutContext";
 
 import "./reset.scss";
 import "./App.scss";
 
-const App = () => {
+const AppContent = () => {
+  const { showLayout } = useLayout();
+
   return (
     <div className="App">
       <p className="not-supported">
@@ -31,7 +28,7 @@ const App = () => {
       <div className="big-routes">
         <Router>
           <div className="app-container">
-            <Navbar />
+            {showLayout && <Navbar />}
             <div className="app-content">
               <Routes>
                 <Route path="/" element={<Home />} />
@@ -49,11 +46,19 @@ const App = () => {
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </div>
-            <Footer />
+            {showLayout && <Footer />}
           </div>
         </Router>
       </div>
     </div>
+  );
+};
+
+const App = () => {
+  return (
+    <LayoutProvider>
+      <AppContent />
+    </LayoutProvider>
   );
 };
 

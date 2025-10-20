@@ -1,7 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Lock, Unlock, CheckCircle, AlertCircle, Eye, Key } from "lucide-react";
 
+import { useLayout } from "../../../../../Utils/Context/LayoutContext";
+
+import "./Lesson10Session4.scss";
+
 const Lesson10Session4 = () => {
+  const { setShowLayout } = useLayout();
   const [unlockedLevels, setUnlockedLevels] = useState([0]);
   const [answers, setAnswers] = useState({});
   const [feedback, setFeedback] = useState({});
@@ -14,6 +19,11 @@ const Lesson10Session4 = () => {
   const [allCodesCorrect, setAllCodesCorrect] = useState(false);
   const [agentNames, setAgentNames] = useState("");
   const [missionComplete, setMissionComplete] = useState(false);
+
+  useEffect(() => {
+    setShowLayout(false);
+    return () => setShowLayout(true);
+  }, [setShowLayout]);
 
   const missions = [
     {
@@ -96,13 +106,11 @@ const Lesson10Session4 = () => {
     const mission = missions[levelId];
     const normalized = normalizeFraction(userAnswer);
 
-    // Check if it's simplified and correct
     const answersToCheck = mission.alternateAnswers || [mission.correctAnswer];
     const isCorrectSimplified = answersToCheck.some(
       (ans) => normalizeFraction(ans) === normalized
     );
 
-    // Check if it's unsimplified but correct
     const isUnsimplified = mission.unsimplifiedAnswers?.some(
       (ans) => normalizeFraction(ans) === normalized
     );
@@ -110,12 +118,10 @@ const Lesson10Session4 = () => {
     if (isCorrectSimplified) {
       let displayCode = mission.codeWord;
 
-      // Apply penalties based on hint usage
       if (hintsUsed[levelId]) {
         displayCode = removeVowels(mission.codeWord);
       }
 
-      // Check if they previously submitted unsimplified
       const wasUnsimplified = simplificationStatus[levelId] === "unsimplified";
 
       setSimplificationStatus({
@@ -149,7 +155,6 @@ const Lesson10Session4 = () => {
     } else if (isUnsimplified) {
       let displayCode = mission.codeWord;
 
-      // Apply penalties: hide first letter for unsimplified, and vowels if hint used
       if (hintsUsed[levelId]) {
         displayCode = hideFirstLetter(removeVowels(mission.codeWord));
       } else {
@@ -247,26 +252,21 @@ const Lesson10Session4 = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white p-4">
-      {/* Header */}
-      <div className="max-w-4xl mx-auto mb-8">
-        <div className="bg-gradient-to-r from-red-600 to-yellow-500 p-1 rounded-lg">
-          <div className="bg-slate-900 p-6 rounded-lg">
-            <h1 className="text-4xl font-bold text-center mb-2 text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-red-500">
-              🕵️ SECRET AGENT: FRACTION DIVISION
-            </h1>
-            <p className="text-center text-yellow-300">
+    <div className="lesson-10-session-4-app-container">
+      <div className="header-wrapper">
+        <div className="header-border">
+          <div className="header-content">
+            <h1 className="header-title">🕵️ SECRET AGENT: FRACTION DIVISION</h1>
+            <p className="header-subtitle">
               Mission Briefing: Solve division problems to unlock classified
               intel
             </p>
-            <div className="mt-4 flex justify-center gap-2">
+            <div className="progress-dots">
               {missions.map((_, idx) => (
                 <div
                   key={idx}
-                  className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
-                    unlockedLevels.includes(idx)
-                      ? "bg-green-500"
-                      : "bg-slate-700"
+                  className={`progress-dot ${
+                    unlockedLevels.includes(idx) ? "unlocked" : "locked"
                   }`}
                 >
                   {unlockedLevels.includes(idx) ? "✓" : <Lock size={16} />}
@@ -277,10 +277,9 @@ const Lesson10Session4 = () => {
         </div>
       </div>
 
-      {/* Mission Cards */}
       <div
-        className={`max-w-4xl mx-auto space-y-4 ${
-          showCodePanel ? "pb-96" : "pb-32"
+        className={`missions-container ${
+          showCodePanel ? "panel-open" : "panel-closed"
         }`}
       >
         {missions.map((mission) => {
@@ -291,35 +290,31 @@ const Lesson10Session4 = () => {
           return (
             <div
               key={mission.id}
-              className={`border-2 rounded-lg overflow-hidden transition-all duration-500 ${
-                isUnlocked
-                  ? "border-yellow-500 bg-slate-800 opacity-100"
-                  : "border-slate-700 bg-slate-900 opacity-50"
-              }`}
+              className={`mission-card ${isUnlocked ? "unlocked" : "locked"}`}
             >
-              <div className="p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-2xl font-bold flex items-center gap-2">
+              <div className="mission-content">
+                <div className="mission-header">
+                  <h2 className="mission-title">
                     {isUnlocked ? (
-                      <Unlock className="text-yellow-500" />
+                      <Unlock className="icon-unlocked" />
                     ) : (
-                      <Lock className="text-slate-500" />
+                      <Lock className="icon-locked" />
                     )}
                     {mission.title}
                   </h2>
                   {hasFeedback?.correct && !canResubmit && (
-                    <CheckCircle className="text-green-400" size={32} />
+                    <CheckCircle className="mission-check" size={32} />
                   )}
                 </div>
 
                 {isUnlocked ? (
                   <>
-                    <div className="bg-slate-900 p-4 rounded-lg mb-4">
-                      <p className="text-lg mb-3">{mission.question}</p>
+                    <div className="question-box">
+                      <p className="question-text">{mission.question}</p>
 
                       <button
                         onClick={() => toggleHint(mission.id)}
-                        className="flex items-center gap-2 text-sm text-yellow-300 hover:text-yellow-400 transition"
+                        className="hint-button"
                       >
                         <Eye size={16} />
                         {showHint[mission.id]
@@ -328,13 +323,11 @@ const Lesson10Session4 = () => {
                       </button>
 
                       {showHint[mission.id] && (
-                        <p className="text-sm text-yellow-300 italic mt-2 pl-6">
-                          💡 {mission.hint}
-                        </p>
+                        <p className="hint-text">💡 {mission.hint}</p>
                       )}
                     </div>
 
-                    <div className="flex gap-3">
+                    <div className="answer-form">
                       <input
                         type="text"
                         placeholder="Enter fraction (e.g., 3/7 or 2 1/4)"
@@ -345,7 +338,7 @@ const Lesson10Session4 = () => {
                             [mission.id]: e.target.value,
                           })
                         }
-                        className="flex-1 px-4 py-3 bg-slate-700 border-2 border-slate-600 rounded-lg focus:border-yellow-500 focus:outline-none text-lg"
+                        className="answer-input"
                         disabled={hasFeedback?.correct && !canResubmit}
                       />
                       <button
@@ -356,7 +349,7 @@ const Lesson10Session4 = () => {
                           !answers[mission.id] ||
                           (hasFeedback?.correct && !canResubmit)
                         }
-                        className="px-6 py-3 bg-gradient-to-r from-yellow-500 to-red-500 rounded-lg font-bold hover:from-yellow-400 hover:to-red-400 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                        className="submit-button"
                       >
                         SUBMIT
                       </button>
@@ -364,30 +357,32 @@ const Lesson10Session4 = () => {
 
                     {hasFeedback && (
                       <div
-                        className={`mt-4 p-4 rounded-lg flex items-center gap-2 ${
+                        className={`feedback-box ${
                           hasFeedback.correct
                             ? canResubmit
-                              ? "bg-yellow-900/50 border-2 border-yellow-500"
-                              : "bg-green-900/50 border-2 border-green-500"
-                            : "bg-red-900/50 border-2 border-red-500"
+                              ? "warning"
+                              : "success"
+                            : "error"
                         }`}
                       >
                         {hasFeedback.correct ? (
                           canResubmit ? (
-                            <AlertCircle className="text-yellow-400" />
+                            <AlertCircle color="#eab308" />
                           ) : (
-                            <CheckCircle className="text-green-400" />
+                            <CheckCircle color="#4ade80" />
                           )
                         ) : (
-                          <AlertCircle className="text-red-400" />
+                          <AlertCircle color="#ef4444" />
                         )}
-                        <p className="font-bold">{hasFeedback.message}</p>
+                        <p className="feedback-message">
+                          {hasFeedback.message}
+                        </p>
                       </div>
                     )}
                   </>
                 ) : (
-                  <div className="text-center py-8 text-slate-500">
-                    <Lock size={48} className="mx-auto mb-2" />
+                  <div className="locked-message">
+                    <Lock size={48} className="locked-icon" />
                     <p>Complete previous mission to unlock</p>
                   </div>
                 )}
@@ -397,14 +392,13 @@ const Lesson10Session4 = () => {
         })}
       </div>
 
-      {/* Code Decoder Panel */}
-      <div className="fixed bottom-0 left-0 right-0 bg-slate-900 border-t-4 border-yellow-500 shadow-2xl z-50">
-        <div className="max-w-4xl mx-auto p-4">
+      <div className="code-panel">
+        <div className="code-panel-inner">
           <button
             onClick={() => setShowCodePanel(!showCodePanel)}
-            className="w-full flex items-center justify-between bg-gradient-to-r from-yellow-600 to-red-600 p-4 rounded-lg font-bold text-lg hover:from-yellow-500 hover:to-red-500 transition"
+            className="code-toggle"
           >
-            <span className="flex items-center gap-2">
+            <span className="code-toggle-text">
               <Key size={24} />
               CODE DECODER
             </span>
@@ -412,50 +406,50 @@ const Lesson10Session4 = () => {
           </button>
 
           {showCodePanel && (
-            <div className="mt-4 bg-slate-800 p-6 rounded-lg max-h-80 overflow-y-auto">
-              <p className="text-yellow-300 mb-4 text-center">
+            <div className="code-panel-content">
+              <p className="code-instructions">
                 Enter all 6 code words separated by spaces to unlock final
                 mission
               </p>
-              <div className="flex gap-3 mb-4">
+              <div className="code-form">
                 <input
                   type="text"
                   placeholder="WORD1 WORD2 WORD3 WORD4 WORD5 WORD6"
                   value={codeInput}
                   onChange={(e) => setCodeInput(e.target.value.toUpperCase())}
-                  className="flex-1 px-4 py-3 bg-slate-700 border-2 border-slate-600 rounded-lg focus:border-yellow-500 focus:outline-none text-lg uppercase"
+                  className="code-input"
                   disabled={allCodesCorrect}
                 />
                 <button
                   onClick={checkAllCodes}
                   disabled={allCodesCorrect}
-                  className="px-6 py-3 bg-green-600 rounded-lg font-bold hover:bg-green-500 disabled:opacity-50 disabled:cursor-not-allowed transition"
+                  className="decode-button"
                 >
                   DECODE
                 </button>
               </div>
 
               {allCodesCorrect && !missionComplete && (
-                <div className="bg-green-900/50 border-2 border-green-500 p-6 rounded-lg">
-                  <p className="text-green-300 text-center text-xl font-bold mb-4">
+                <div className="name-entry-box">
+                  <p className="name-entry-title">
                     ✓ All codes verified! Enter agent name(s) to complete the
                     mission:
                   </p>
-                  <p className="text-green-200 text-center text-sm mb-4 italic">
+                  <p className="name-entry-hint">
                     (Separate multiple names with commas: John, Sarah, Mike)
                   </p>
-                  <div className="flex gap-3">
+                  <div className="name-entry-form">
                     <input
                       type="text"
                       placeholder="Enter name(s)..."
                       value={agentNames}
                       onChange={(e) => setAgentNames(e.target.value)}
-                      className="flex-1 px-4 py-3 bg-slate-700 border-2 border-green-500 rounded-lg focus:border-green-400 focus:outline-none text-lg"
+                      className="name-input"
                     />
                     <button
                       onClick={completeMission}
                       disabled={!agentNames.trim()}
-                      className="px-8 py-3 bg-gradient-to-r from-green-500 to-blue-500 rounded-lg font-bold text-xl hover:from-green-400 hover:to-blue-400 disabled:opacity-50 disabled:cursor-not-allowed transition"
+                      className="complete-button"
                     >
                       COMPLETE MISSION
                     </button>
@@ -467,26 +461,25 @@ const Lesson10Session4 = () => {
         </div>
       </div>
 
-      {/* Victory Screen */}
       {missionComplete && (
-        <div className="fixed inset-0 bg-black/95 flex items-center justify-center z-50">
-          <div className="bg-gradient-to-br from-yellow-600 to-red-600 p-8 rounded-2xl max-w-2xl text-center">
-            <div className="text-6xl mb-4">🏆</div>
-            <h2 className="text-4xl font-bold mb-4">MISSION ACCOMPLISHED!</h2>
-            <p className="text-2xl mb-4">
+        <div className="victory-overlay">
+          <div className="victory-card">
+            <div className="victory-trophy">🏆</div>
+            <h2 className="victory-title">MISSION ACCOMPLISHED!</h2>
+            <p className="victory-agent-line">
               Outstanding work, {getAgentTitle()} {formatAgentNames()}!
             </p>
-            <p className="text-xl mb-4">
+            <p className="victory-message">
               {parseAgentNames().length === 1 ? "You've" : "You've all"}{" "}
               successfully cracked all the codes and mastered fraction division!
             </p>
-            <div className="bg-black/30 p-4 rounded-lg mb-4">
-              <p className="text-sm mb-2">Classification Code:</p>
-              <p className="text-2xl font-bold tracking-wider">
+            <div className="victory-code-box">
+              <p className="victory-code-label">Classification Code:</p>
+              <p className="victory-code-text">
                 {missions.map((m) => m.codeWord).join(" - ")}
               </p>
             </div>
-            <p className="text-lg">
+            <p className="victory-final">
               Your skills are now classified as: EXPERT 🎉
             </p>
           </div>
