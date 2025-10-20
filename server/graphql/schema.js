@@ -1,5 +1,4 @@
-// graphql/schema.js
-const { gql } = require("apollo-server-express");
+const { gql } = require('graphql-tag');
 
 const typeDefs = gql`
   type Announcement {

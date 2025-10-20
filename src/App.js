@@ -1,4 +1,10 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+// src/App.js
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
 
 import Navbar from "./Comp/MajorNavbar/MajorNavbar";
 import Footer from "./Comp/Footer/Footer";
@@ -9,6 +15,7 @@ import NotFound from "./Pages/NotFound/NotFound";
 import Contact from "./Pages/Contact/Contact";
 import Resources from "./Pages/Resources/Resrouces";
 import Philosophy from "./Pages/Philosophy/Philosophy";
+import ResourceDynamic from "./Pages/Resource/ResourceDynamic"; // ⬅️ NEW
 
 import "./reset.scss";
 import "./App.scss";
@@ -27,15 +34,18 @@ const App = () => {
             <Navbar />
             <div className="app-content">
               <Routes>
-                <Route exact path="/" element={<Home />} />
-                <Route exact path="/about" element={<AboutMe />} />
-                <Route exact path="/contact" element={<Contact />} />
-                <Route exact path="/resources" element={<Resources />} />
+                <Route path="/" element={<Home />} />
+                <Route path="/about" element={<AboutMe />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/resources" element={<Resources />} />
+                <Route path="/about/philosophy" element={<Philosophy />} />
+
+                <Route path="/resource/:id" element={<ResourceDynamic />} />
                 <Route
-                  exact
-                  path="/about/philosophy"
-                  element={<Philosophy />}
+                  path="/resource/:grade/:subject/:standard/:file"
+                  element={<ResourceDynamic />}
                 />
+
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </div>

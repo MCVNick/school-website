@@ -55,7 +55,15 @@ const Resources = () => {
   const handleSearchChange = (e) => setSearchQuery(e.target.value);
   const handleResourceTypeChange = (e) => setResourceType(e.target.value);
   const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
-  const handleCardClick = (internalLink) => navigate(internalLink);
+
+  // ✅ updated click handler
+  const handleCardClick = (internalLink) => {
+    if (!internalLink) return;
+    const path = internalLink.startsWith("/resource/")
+      ? internalLink
+      : `/resource/${internalLink}`;
+    navigate(path);
+  };
 
   const filteredResources = resources.filter((resource) => {
     const matchesSearchQuery = resource.title
