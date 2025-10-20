@@ -48,9 +48,15 @@ async function start() {
         }
       );
 
-      res.json(result.body);
+      // Apollo Server 4 response handling
+      if (result.body.kind === "single") {
+        res.json(result.body.singleResult);
+      } else {
+        res.status(400).json({ error: "Unexpected response format" });
+      }
     } catch (error) {
-      res.status(500).json({ error: error.message });
+      console.error("GraphQL Error:", error);
+      res.status(500).json({ errors: [{ message: error.message }] });
     }
   });
 
