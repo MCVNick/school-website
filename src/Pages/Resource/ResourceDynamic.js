@@ -1,7 +1,7 @@
 import { Suspense, useMemo, lazy, useEffect } from "react";
 import { useParams, useLocation } from "react-router-dom";
 
-import { useLayout } from "../../Utils/Context/LayoutContext"
+import { useLayout } from "../../Utils/Context/LayoutContext";
 
 const modules = require.context("./", true, /\.jsx?$/);
 
@@ -17,7 +17,15 @@ export default function ResourceDynamic() {
   }, [setShowLayout]);
 
   const relPath = useMemo(() => {
+    // Single-level: /resource/:id
     if (id) return `./${id}.js`;
+
+    // Two-level: /resource/:grade/:subject
+    if (grade && subject && !standard && !file) {
+      return `./${grade}/${subject}`;
+    }
+
+    // Four-level: /resource/:grade/:subject/:standard/:file
     return `./${grade}/${subject}/${standard}/${file}`;
   }, [id, grade, subject, standard, file]);
 
@@ -46,8 +54,12 @@ export default function ResourceDynamic() {
         <p>Expected it to live here:</p>
         <pre style={{ whiteSpace: "pre-wrap" }}>
           {`src/Pages/Resource/${
-            id ? `${id}.js` : `${grade}/${subject}/${standard}/${file}`
-          } `}
+            id
+              ? `${id}.js`
+              : grade && subject && !standard && !file
+              ? `${grade}/${subject}.js`
+              : `${grade}/${subject}/${standard}/${file}`
+          }`}
         </pre>
         <p>
           Make sure the file exists and <strong>default-exports</strong> a React

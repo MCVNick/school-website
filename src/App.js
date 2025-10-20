@@ -39,10 +39,13 @@ const AppContent = () => {
 
                 <Route path="/resource/:id" element={<ResourceDynamic />} />
                 <Route
+                  path="/resource/:grade/:subject"
+                  element={<ResourceDynamic />}
+                />
+                <Route
                   path="/resource/:grade/:subject/:standard/:file"
                   element={<ResourceDynamic />}
                 />
-
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </div>
