@@ -56,13 +56,27 @@ const Resources = () => {
   const handleResourceTypeChange = (e) => setResourceType(e.target.value);
   const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
 
-  // ✅ updated click handler
-  const handleCardClick = (internalLink) => {
+  const handleCardClick = (e, internalLink) => {
+    e.preventDefault();
+
     if (!internalLink) return;
-    const path = internalLink.startsWith("/resource/")
-      ? internalLink
-      : `/resource/${internalLink}`;
-    navigate(path);
+
+    let path = internalLink.trim();
+
+    if (path.startsWith("/")) {
+      path = path.substring(1);
+    }
+
+    if (path.startsWith("resource/")) {
+    }
+
+    const finalPath = `/resource/${path}`;
+
+    navigate(finalPath);
+  };
+
+  const handleExternalLinkClick = (e) => {
+    e.stopPropagation();
   };
 
   const filteredResources = resources.filter((resource) => {
@@ -152,9 +166,10 @@ const Resources = () => {
           <div
             key={resource.id}
             className={`card ${!resource.internalLink && "no-internal"}`}
-            onClick={() =>
-              resource.internalLink && handleCardClick(resource.internalLink)
+            onClick={(e) =>
+              resource.internalLink && handleCardClick(e, resource.internalLink)
             }
+            style={{ cursor: resource.internalLink ? "pointer" : "default" }}
           >
             <h3>{resource.title}</h3>
             <p>{resource.description}</p>
@@ -171,8 +186,11 @@ const Resources = () => {
                 href={resource.externalLink}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={handleExternalLinkClick}
               >
-                <button>{resource.externalLinkTitle}</button>
+                <button onClick={handleExternalLinkClick}>
+                  {resource.externalLinkTitle}
+                </button>
               </a>
             )}
           </div>
