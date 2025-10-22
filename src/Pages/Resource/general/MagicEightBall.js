@@ -1,65 +1,149 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import { useLayout } from "../../../Utils/Context/LayoutContext";
 
 import "./MagicEightBall.scss";
 
+const yesResponses = [
+  "Yes!",
+  "Absolutely!",
+  "Of course!",
+  "Sure thing!",
+  "Yes, definitely!",
+  "Without a doubt!",
+  "You may count on it!",
+  "Most likely!",
+];
+
+const noResponses = [
+  "No",
+  "Not right now",
+  "Maybe later",
+  "Not today",
+  "Don't count on it",
+  "My reply is no",
+  "Outlook not so good",
+  "Very doubtful",
+];
+
+const normalResponses = [
+  "It is certain",
+  "Without a doubt",
+  "You may rely on it",
+  "As I see it, yes",
+  "Most likely",
+  "Outlook good",
+  "Signs point to yes",
+  "Reply hazy, try again",
+  "Ask again later",
+  "Better not tell you now",
+  "Cannot predict now",
+  "Concentrate and ask again",
+  "Don't count on it",
+  "My reply is no",
+  "My sources say no",
+  "Outlook not so good",
+  "Very doubtful",
+];
+
+const getRandomResponse = (responses) => {
+  return responses[Math.floor(Math.random() * responses.length)];
+};
+
 const MagicEightBall = () => {
   const [response, setResponse] = useState("");
   const [mode, setMode] = useState("normal");
   const [isShaking, setIsShaking] = useState(false);
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
+  const containerRef = useRef(null);
 
   const { setShowLayout } = useLayout();
+
+  const minSwipeDistance = 50;
 
   useEffect(() => {
     setShowLayout(false);
   }, [setShowLayout]);
 
-  const yesResponses = [
-    "Yes!",
-    "Absolutely!",
-    "Of course!",
-    "Sure thing!",
-    "Yes, definitely!",
-    "Without a doubt!",
-    "You may count on it!",
-    "Most likely!",
-  ];
+  useEffect(() => {
+    const element = containerRef.current;
+    if (!element) return;
 
-  const noResponses = [
-    "No",
-    "Not right now",
-    "Maybe later",
-    "Not today",
-    "Don't count on it",
-    "My reply is no",
-    "Outlook not so good",
-    "Very doubtful",
-  ];
+    const handleTouchStart = (e) => {
+      setTouchEnd(null);
+      setTouchStart({
+        x: e.touches[0].clientX,
+        y: e.touches[0].clientY,
+      });
+    };
 
-  const normalResponses = [
-    "It is certain",
-    "Without a doubt",
-    "You may rely on it",
-    "As I see it, yes",
-    "Most likely",
-    "Outlook good",
-    "Signs point to yes",
-    "Reply hazy, try again",
-    "Ask again later",
-    "Better not tell you now",
-    "Cannot predict now",
-    "Concentrate and ask again",
-    "Don't count on it",
-    "My reply is no",
-    "My sources say no",
-    "Outlook not so good",
-    "Very doubtful",
-  ];
+    const handleTouchMove = (e) => {
+      e.preventDefault();
+      setTouchEnd({
+        x: e.touches[0].clientX,
+        y: e.touches[0].clientY,
+      });
+    };
 
-  const getRandomResponse = (responses) => {
-    return responses[Math.floor(Math.random() * responses.length)];
-  };
+    const handleTouchEnd = () => {
+      if (!touchStart || !touchEnd) return;
+
+      const distanceX = touchStart.x - touchEnd.x;
+      const distanceY = touchStart.y - touchEnd.y;
+      const isHorizontalSwipe = Math.abs(distanceX) > Math.abs(distanceY);
+
+      let selectedMode = "normal";
+
+      if (isHorizontalSwipe) {
+        if (Math.abs(distanceX) > minSwipeDistance) {
+          if (distanceX > 0) {
+            selectedMode = "no";
+          } else {
+            selectedMode = "yes";
+          }
+        }
+      } else {
+        if (Math.abs(distanceY) > minSwipeDistance) {
+          selectedMode = "normal";
+        }
+      }
+
+      if (
+        Math.abs(distanceX) > minSwipeDistance ||
+        Math.abs(distanceY) > minSwipeDistance
+      ) {
+        setMode(selectedMode);
+        setIsShaking(true);
+        setResponse("");
+
+        setTimeout(() => {
+          let newResponse;
+          if (selectedMode === "yes") {
+            newResponse = getRandomResponse(yesResponses);
+          } else if (selectedMode === "no") {
+            newResponse = getRandomResponse(noResponses);
+          } else {
+            newResponse = getRandomResponse(normalResponses);
+          }
+          setResponse(newResponse);
+          setIsShaking(false);
+        }, 1000);
+      }
+    };
+
+    element.addEventListener("touchstart", handleTouchStart, {
+      passive: false,
+    });
+    element.addEventListener("touchmove", handleTouchMove, { passive: false });
+    element.addEventListener("touchend", handleTouchEnd, { passive: false });
+
+    return () => {
+      element.removeEventListener("touchstart", handleTouchStart);
+      element.removeEventListener("touchmove", handleTouchMove);
+      element.removeEventListener("touchend", handleTouchEnd);
+    };
+  }, [touchStart, touchEnd, minSwipeDistance]);
 
   const shake8Ball = () => {
     setIsShaking(true);
@@ -95,7 +179,7 @@ const MagicEightBall = () => {
   };
 
   return (
-    <div className="magic8ball-container">
+    <div ref={containerRef} className="magic8ball-container">
       <div onClick={setNoMode} className="invisible-corner top-left" />
 
       <div onClick={setYesMode} className="invisible-corner top-right" />
